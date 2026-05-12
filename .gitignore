@@ -1,0 +1,36 @@
+# Laravel (bc-cms)
+bc-cms/vendor/
+bc-cms/node_modules/
+
+# storage
+bc-cms/storage/*
+!bc-cms/storage/app/
+bc-cms/storage/app/*
+!bc-cms/storage/app/public/
+bc-cms/storage/app/public/*
+!bc-cms/storage/app/public/demo/
+
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.vscode
+storage/bc.php
+storage/pro.php
+storage/installed
+public/themes/*/dist
+/.nova
+/.zed
+resources/GeoLite2-City_20210622/GeoLite2-City.mmdb
+/.idea
+
+# Docker
+/docker/
+docker-compose.yml
