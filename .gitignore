@@ -25,10 +25,8 @@ yarn-error.log
 storage/bc.php
 storage/pro.php
 storage/installed
-public/themes/*/dist
 /.nova
 /.zed
-resources/GeoLite2-City_20210622/GeoLite2-City.mmdb
 /.idea
 
 # Docker
