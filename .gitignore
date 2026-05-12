@@ -1,34 +1,20 @@
-# Laravel (bc-cms)
-bc-cms/vendor/
-bc-cms/node_modules/
+# Laravel (src)
+src/vendor/
+src/node_modules/
+src/storage/*
+src/.env
+src/.env.backup
+src/.env.production
+src/supervisord.pid
 
-# storage
-bc-cms/storage/*
-!bc-cms/storage/app/
-bc-cms/storage/app/*
-!bc-cms/storage/app/public/
-bc-cms/storage/app/public/*
-!bc-cms/storage/app/public/demo/
-
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
-npm-debug.log
-yarn-error.log
-/.fleet
+# IDE
 /.vscode
-storage/bc.php
-storage/pro.php
-storage/installed
-/.nova
-/.zed
 /.idea
 
 # Docker
-/docker/
+docker/
 docker-compose.yml
+.env
+
+# Files
+my_scripts/
