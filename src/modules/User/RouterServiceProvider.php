@@ -28,23 +28,6 @@ class RouterServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapAdminRoutes();
-
-        $this->mapLanguageRoutes();
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapLanguageRoutes()
-    {
-//        Route::middleware('web')
-//            ->namespace($this->moduleNamespace)
-//            ->prefix(app()->getLocale())
-//            ->group(__DIR__ . '/Routes/language.php');
     }
 
     /**
