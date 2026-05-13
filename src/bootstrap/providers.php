@@ -1,7 +1,10 @@
 <?php
 
-use App\Providers\AppServiceProvider;
-
 return [
-    AppServiceProvider::class,
+    App\Providers\AppServiceProvider::class,
+
+    /*
+    * Custom Service Providers...
+    */
+    Modules\ServiceProvider::class,
 ];
