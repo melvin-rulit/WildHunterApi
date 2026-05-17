@@ -6,7 +6,7 @@ use OpenApi\Attributes as OA;
 
 #[OA\Info(
     version: ApiConfig::VERSION,
-    title: "WildHunter API"
+    title: "Book Rest API"
 )]
 
 #[OA\SecurityScheme(
