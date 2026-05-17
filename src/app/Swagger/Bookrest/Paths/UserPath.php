@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Swagger\Paths;
+namespace App\Swagger\Bookrest\Paths;
 
-use App\Swagger\ApiConfig;
+use App\Swagger\Bookrest\ApiConfig;
 use OpenApi\Attributes as OA;
 
-class TestPath
+class UserPath
 {
     #[OA\Get(
         path: "/api/" . ApiConfig::VERSION . "/users",

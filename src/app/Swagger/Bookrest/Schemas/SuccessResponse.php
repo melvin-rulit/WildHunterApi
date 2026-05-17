@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Swagger\Schemas;
+namespace App\Swagger\Bookrest\Schemas;
 
 use OpenApi\Attributes as OA;
 

@@ -1,11 +1,9 @@
 <?php
 
-namespace Modules\User\Controllers;
+namespace Modules\User\Controllers\Api\BookRest;
 
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Modules\User\Services\UserService;
 
 class UserController

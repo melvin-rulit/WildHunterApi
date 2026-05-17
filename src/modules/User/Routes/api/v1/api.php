@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\User\Controllers\UserController;
+use Modules\User\Controllers\Api\BookRest\UserController;
 
- Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
      Route::get('/users', [UserController::class, 'searchUser']);
  });
