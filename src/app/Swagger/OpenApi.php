@@ -8,4 +8,11 @@ use OpenApi\Attributes as OA;
     version: "1.0.0",
     title: "WildHunter API"
 )]
+
+#[OA\SecurityScheme(
+    securityScheme: "bearerAuth",
+    type: "http",
+    bearerFormat: "JWT",
+    scheme: "bearer"
+)]
 final class OpenApi {}
