@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => 'default',
+    'default' => 'bookrest',
     'documentations' => [
         'default' => [
             'api' => [
@@ -46,6 +46,21 @@ return [
                 'annotations' => [
                     base_path('app/Swagger'),
                 ],
+            ],
+        ],
+        'bookrest' => [
+            'api' => [
+                'title' => 'Bookrest API',
+            ],
+            'routes' => [
+                'api' => 'api/bookrest/documentation',
+                'docs' => 'docs/bookrest',
+            ],
+            'paths' => [
+                'annotations' => [
+                    base_path('app/Swagger/Bookrest'),
+                ],
+             'docs_json' => 'bookrest-api-docs.json',
             ],
         ],
     ],
