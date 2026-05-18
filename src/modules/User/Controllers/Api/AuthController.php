@@ -28,9 +28,9 @@ class AuthController
 
         return new AuthSuccessResponse($result['token'], $result['user']);
     }
-    public function logout(): Response
+    public function logout(Request $request): Response
     {
-        auth()->user()->currentAccessToken()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->noContent();
     }

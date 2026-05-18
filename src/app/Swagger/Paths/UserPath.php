@@ -65,4 +65,28 @@ class UserPath
     )]
     public function login(): void
     {}
+
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/logout",
+        summary: "Выход пользователя из системы",
+        security: [['bearerAuth' => []]],
+        tags: ["Users"],
+        responses: [
+            new OA\Response(
+                response: 204,
+                description: "Успешный выход (токен удалён)"
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Unauthenticated")
+                    ]
+                )
+            )
+        ]
+    )]
+    public function logout(): void
+    {}
 }
