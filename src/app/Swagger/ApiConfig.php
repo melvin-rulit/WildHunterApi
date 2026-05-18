@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Swagger\WildHunter;
+namespace App\Swagger;
 
 class ApiConfig
 {

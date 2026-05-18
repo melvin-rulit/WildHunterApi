@@ -3,21 +3,6 @@
 return [
     'default' => 'hunter',
     'documentations' => [
-        'bookrest' => [
-            'api' => [
-                'title' => 'Bookrest API',
-            ],
-            'routes' => [
-                'api' => 'api/bookrest/documentation',
-                'docs' => 'docs/bookrest',
-            ],
-            'paths' => [
-                'annotations' => [
-                    base_path('app/Swagger/Bookrest'),
-                ],
-             'docs_json' => 'bookrest-api-docs.json',
-            ],
-        ],
         'hunter' => [
             'api' => [
                 'title' => 'WildHunter API',
@@ -28,7 +13,7 @@ return [
             ],
             'paths' => [
                 'annotations' => [
-                    base_path('app/Swagger/WildHunter'),
+                    base_path('app/Swagger'),
                 ],
                 'docs_json' => 'wild_hunter-api-docs.json',
             ],

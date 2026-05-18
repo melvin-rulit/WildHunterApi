@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Swagger\Bookrest\Tags;
+namespace App\Swagger\Tags;
 
 use OpenApi\Attributes as OA;
 

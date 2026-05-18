@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Swagger\WildHunter\Paths;
+namespace App\Swagger\Paths;
 
-use App\Swagger\WildHunter\ApiConfig;
+use App\Swagger\ApiConfig;
 use OpenApi\Attributes as OA;
 
 class UserPath
