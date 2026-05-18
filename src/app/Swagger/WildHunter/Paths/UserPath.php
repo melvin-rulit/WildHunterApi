@@ -37,16 +37,13 @@ class UserPath
             content: new OA\JsonContent(
                 required: ["email", "password"],
                 properties: [
-                    new OA\Property(
-                        property: "email",
-                        type: "string",
-                        format: "email"
-                    ),
-                    new OA\Property(
-                        property: "password",
-                        type: "string",
-                        format: "password"
-                    ),
+                    new OA\Property(property: "email", type: "string", format: "email"),
+                    new OA\Property(property: "password", type: "string", format: "password"),
+                ],
+                type: "object",
+                example: [
+                    "email" => "test@test.com",
+                    "password" => "secret"
                 ]
             )
         ),
