@@ -31,4 +31,9 @@ class AuthService
             'token' => $token,
         ];
     }
+
+    public function refresh()
+    {
+        
+    }
 }

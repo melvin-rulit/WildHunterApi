@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\User\Controllers\Api\BookRest\AuthController;
-use Modules\User\Controllers\Api\BookRest\UserController;
+use Modules\User\Controllers\Api\AuthController;
+use Modules\User\Controllers\Api\WildHunter\UserController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
