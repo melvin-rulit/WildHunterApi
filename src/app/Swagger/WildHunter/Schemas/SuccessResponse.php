@@ -9,7 +9,7 @@ use OpenApi\Attributes as OA;
     required: ['success', 'message', 'data'],
     type: 'object'
 )]
-class WildHunterSuccessResponse
+class SuccessResponse
 {
     #[OA\Property(example: true)]
     public bool $success;
