@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Swagger\Bookrest;
+namespace App\Swagger\WildHunter;
 
 use OpenApi\Attributes as OA;
 
 #[OA\Info(
     version: ApiConfig::VERSION,
-    title: "BookRest API"
+    title: "WildHunter API"
 )]
 
 #[OA\SecurityScheme(
