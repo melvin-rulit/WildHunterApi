@@ -13,8 +13,17 @@ class UserPath
         security: [['bearerAuth' => []]],
         tags: ["Users"],
         responses: [
-            new OA\Response( ref: '#/components/schemas/SuccessResponse', response: 200),
-
+            new OA\Response(
+                response: 200,
+                description: "OK",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "success", type: "boolean", example: true),
+                        new OA\Property(property: "message", type: "string", example: ""),
+                        new OA\Property(property: "data", type: "object", example: "")
+                    ]
+                )
+            )
         ]
     )]
     public function GetUsers(): void
@@ -47,10 +56,14 @@ class UserPath
                 response: 200,
                 description: "Успешная авторизация",
                 content: new OA\JsonContent(
-                    ref: '#/components/schemas/AuthSuccessResponse'
+                    properties: [
+                        new OA\Property(property: "success", type: "boolean", example: true),
+                        new OA\Property(property: "token", type: "string", example: "1|abc123"),
+                        new OA\Property(property: "token_type", type: "string", example: "Bearer"),
+                        new OA\Property(property: "expires_in_minutes", type: "integer", example: 60),
+                    ]
                 )
             )
-
         ]
     )]
     public function login(): void
