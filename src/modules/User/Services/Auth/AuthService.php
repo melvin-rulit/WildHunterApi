@@ -21,7 +21,10 @@ class AuthService
         $user = $this->userService->findByEmail($dto->email);
 
         if (! $user || ! Hash::check($dto->password, $user->password)) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException(
+                errorCode: 'auth_token_error',
+                domain: 'auth'
+            );
         }
 
         $token = $user->createToken('api_token')->plainTextToken;
@@ -34,6 +37,6 @@ class AuthService
 
     public function refresh()
     {
-        
+
     }
 }
