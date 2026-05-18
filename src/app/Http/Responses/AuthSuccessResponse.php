@@ -12,12 +12,6 @@ use Illuminate\Http\JsonResponse;
  */
 final class AuthSuccessResponse extends JsonResponse
 {
-    /**
-     * @var string
-     *
-     */
-    protected string $message;
-
     public function __construct(string $token, User $user, int $status = 200)
     {
         parent::__construct([
