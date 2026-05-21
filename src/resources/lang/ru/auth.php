@@ -5,6 +5,9 @@ return [
         'auth_token_mismatch' => 'Время сессии истекло. Пожалуйста, войдите в систему заново',
         'auth_token_error' => 'Ошибка аутентификации',
     ],
+    'rules' => [
+        'registration_disabled' => 'Регистрация отключена',
+    ],
     'successes' => [
 
     ]
