@@ -115,7 +115,7 @@ class AuthPath
                     new OA\Property(property: "last_name", type: "string", example: "Doe"),
                     new OA\Property(property: "email", type: "string", format: "email", example: "test@test.com"),
                     new OA\Property(property: "password", type: "string", format: "password", example: "Secret123"),
-                    new OA\Property(property: "phone", type: "string", example: "+37360123456"),
+                    new OA\Property(property: "phone", type: "string", example: "+7 (996) 579-72-42"),
                     new OA\Property(property: "role", type: "string", example: "baseadmin"),
                     new OA\Property(property: "term", type: "boolean", example: true),
                 ],
