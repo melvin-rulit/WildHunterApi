@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Modules\User\Dto\Auth\LoginData;
+use App\Exceptions\ForbiddenException;
+use Modules\User\Dto\Auth\RegisterData;
 use App\Exceptions\UnauthorizedException;
-use Modules\User\Http\Requests\Auth\RefreshTokenRequest;
 use Modules\User\Services\Auth\AuthService;
 use App\Http\Responses\AuthSuccessResponse;
 use Modules\User\Http\Requests\Auth\LoginRequest;
+use Modules\User\Http\Requests\Auth\RegisterRequest;
+use Modules\User\Http\Requests\Auth\RefreshTokenRequest;
 
 class AuthController
 {
@@ -34,6 +37,17 @@ class AuthController
 
         return response()->noContent();
     }
+
+    /**
+     * @throws ForbiddenException
+     */
+    public function register(RegisterRequest $request): JsonResponse
+        {
+            $dto = RegisterData::fromRequest($request);
+            $result = $this->authService->register($dto);
+
+            return new AuthSuccessResponse($result['token'], $result['user']);
+        }
 
     public function refreshToken(RefreshTokenRequest $request)
     {
