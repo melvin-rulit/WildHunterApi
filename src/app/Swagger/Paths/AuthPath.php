@@ -33,9 +33,36 @@ class AuthPath
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: "success", type: "boolean", example: true),
+                        new OA\Property(
+                            property: "user",
+                            properties: [
+                                new OA\Property(property: "id", type: "integer", example: 1),
+                                new OA\Property(property: "first_name", type: "string", example: "John"),
+                                new OA\Property(property: "last_name", type: "string", example: "Doe"),
+                                new OA\Property(property: "email", type: "string", example: "test@test.com"),
+                            ],
+                            type: "object"
+                        ),
                         new OA\Property(property: "token", type: "string", example: "1|abc123"),
                         new OA\Property(property: "token_type", type: "string", example: "Bearer"),
                         new OA\Property(property: "expires_in_minutes", type: "integer", example: 60),
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 422,
+                description: "Ошибка валидации",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Данные недействительны"),
+                        new OA\Property(
+                            property: "errors",
+                            type: "object",
+                            additionalProperties: new OA\AdditionalProperties(
+                                type: "array",
+                                items: new OA\Items(type: "string")
+                            )
+                        ),
                     ]
                 )
             )
@@ -59,12 +86,86 @@ class AuthPath
                 description: "Не авторизован",
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: "message", type: "string", example: "Unauthenticated")
+                        new OA\Property(property: "message", type: "string", example: "Не аутентифицированный")
                     ]
                 )
             )
         ]
     )]
     public function logout(): void
+    {}
+
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/register",
+        summary: "Регистрация пользователя",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: [
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "password",
+                    "phone",
+                    "role",
+                    "term"
+                ],
+                properties: [
+                    new OA\Property(property: "first_name", type: "string", example: "John"),
+                    new OA\Property(property: "last_name", type: "string", example: "Doe"),
+                    new OA\Property(property: "email", type: "string", format: "email", example: "test@test.com"),
+                    new OA\Property(property: "password", type: "string", format: "password", example: "Secret123"),
+                    new OA\Property(property: "phone", type: "string", example: "+37360123456"),
+                    new OA\Property(property: "role", type: "string", example: "baseadmin"),
+                    new OA\Property(property: "term", type: "boolean", example: true),
+                ],
+                type: "object"
+            )
+        ),
+        tags: ["Auth"],
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: "Пользователь успешно зарегистрирован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "success", type: "boolean", example: true),
+//                        new OA\Property(
+//                            property: "user",
+//                            properties: [
+//                                new OA\Property(property: "id", type: "integer", example: 1),
+//                                new OA\Property(property: "first_name", type: "string", example: "John"),
+//                                new OA\Property(property: "last_name", type: "string", example: "Doe"),
+//                                new OA\Property(property: "email", type: "string", example: "test@test.com"),
+//                            ],
+//                            type: "object"
+//                        ),
+                        new OA\Property(property: "token", type: "string", example: "1|abc123"),
+                        new OA\Property(property: "token_type", type: "string", example: "Bearer"),
+                        new OA\Property(property: "expires_in_minutes", type: "integer", example: 60),
+                    ]
+                )
+            ),
+
+            new OA\Response(
+                response: 422,
+                description: "Ошибка валидации",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Данные недействительны"),
+                        new OA\Property(
+                            property: "errors",
+                            type: "object",
+                            additionalProperties: new OA\AdditionalProperties(
+                                type: "array",
+                                items: new OA\Items(type: "string")
+                            )
+                        ),
+                    ]
+                )
+            )
+        ]
+    )]
+    public function register(): void
     {}
 }
