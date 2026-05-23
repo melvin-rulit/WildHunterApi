@@ -21,9 +21,4 @@ class RoleService
     {
         return Role::where('code', $code)->first();
     }
-
-    public function getByName($code): ?Role
-    {
-
-    }
 }
