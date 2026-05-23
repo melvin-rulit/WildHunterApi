@@ -2,13 +2,13 @@
 
 namespace Modules\Role\Models;
 
-use App\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Modules\User\Helpers\PermissionHelper;
 
 //TODO убрать ненужные методы и избавиться от базовой модели
-class Role extends BaseModel
+class Role extends Model
 {
     protected $table = 'core_roles';
 

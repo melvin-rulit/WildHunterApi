@@ -11,6 +11,7 @@ class RolePath
     #[OA\Get(
         path: "/api/" . ApiConfig::VERSION . "/roles",
         summary: "Получить роли",
+        security: [["bearerAuth" => []]],
         tags: ["Roles/Permissions"],
         responses: [
             new OA\Response(
