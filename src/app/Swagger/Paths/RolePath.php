@@ -76,4 +76,29 @@ class RolePath
         ]
     )]
     public function getByCode(): void {}
+
+    #[OA\Get(
+        path: "/api/" . ApiConfig::VERSION . "/roles/user/{id}",
+        summary: "Получить роль пользователя",
+        security: [["bearerAuth" => []]],
+        tags: ["Roles/Permissions"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+        ]
+    )]
+    public function getUserRole(): void {}
+
+
+
 }

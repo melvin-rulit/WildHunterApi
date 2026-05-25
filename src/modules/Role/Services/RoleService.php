@@ -2,6 +2,7 @@
 
 namespace Modules\Role\Services;
 
+use App\Models\User;
 use Modules\Role\Models\Role;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -20,5 +21,10 @@ class RoleService
     public function getByCode($code): ?Role
     {
         return Role::where('code', $code)->first();
+    }
+
+    public function getUserRole(User $user)
+    {
+        return $user->role()->first();
     }
 }

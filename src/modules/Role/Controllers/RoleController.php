@@ -2,6 +2,7 @@
 
 namespace Modules\Role\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Modules\Role\Services\RoleService;
 use App\Http\Responses\SuccessResponse;
@@ -28,6 +29,13 @@ class RoleController
     public function getByCode(string $code): JsonResponse
     {
         $result = $this->roleService->getByCode($code);
+
+        return new SuccessResponse(data: $result);
+    }
+
+    public function getUserRole(User $user): JsonResponse
+    {
+        $result = $this->roleService->getUserRole($user);
 
         return new SuccessResponse(data: $result);
     }
