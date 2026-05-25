@@ -31,7 +31,7 @@ class RolePath
         parameters: [
             new OA\Parameter(
                 name: "id",
-                description: "id (int)",
+                description: "id роли",
                 in: "path",
                 required: true,
                 schema: new OA\Schema(type: "string")
@@ -58,7 +58,7 @@ class RolePath
         parameters: [
             new OA\Parameter(
                 name: "code",
-                description: "code (string)",
+                description: "code роли",
                 in: "path",
                 required: true,
                 schema: new OA\Schema(type: "string")
@@ -85,6 +85,7 @@ class RolePath
         parameters: [
             new OA\Parameter(
                 name: "id",
+                description: "id пользователя",
                 in: "path",
                 required: true,
                 schema: new OA\Schema(type: "integer")
