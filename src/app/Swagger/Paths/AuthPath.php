@@ -39,7 +39,6 @@ class AuthPath
                                 new OA\Property(property: "id", type: "integer", example: 1),
                                 new OA\Property(property: "first_name", type: "string", example: "John"),
                                 new OA\Property(property: "last_name", type: "string", example: "Doe"),
-                                new OA\Property(property: "email", type: "string", example: "test@test.com"),
                             ],
                             type: "object"
                         ),
