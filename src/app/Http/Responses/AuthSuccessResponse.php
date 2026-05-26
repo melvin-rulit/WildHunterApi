@@ -4,7 +4,7 @@ namespace App\Http\Responses;
 
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-//use App\Models\User\Http\Resources\UserResource;
+use Modules\User\Http\Resources\UserLoginResource;
 
 /**
  * Class ErrorResponse
@@ -19,7 +19,7 @@ final class AuthSuccessResponse extends JsonResponse
                 'token' => $token,
                 'token_type' => 'Bearer',
                 'expires_in_minutes' => config('sanctum.expiration'),
-//                'user' => new UserResource($user),
+                'user' => new UserLoginResource($user),
             ], $status);
     }
 }
