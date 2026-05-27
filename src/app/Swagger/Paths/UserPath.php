@@ -17,8 +17,57 @@ class UserPath
                 ref: "#/components/responses/SuccessResponse",
                 response: 200
             ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован"
+            ),
         ]
     )]
     public function GetUsers(): void
+    {}
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/user/change-password",
+        summary: "Смена пароля пользователя",
+        security: [['bearerAuth' => []]],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["current_password", "new_password", "new_password_confirmation"],
+                properties: [
+                    new OA\Property(
+                        property: "current_password",
+                        type: "string",
+                        example: "OldPassword123"
+                    ),
+                    new OA\Property(
+                        property: "new_password",
+                        type: "string",
+                        example: "NewPassword123"
+                    ),
+                    new OA\Property(
+                        property: "new_password_confirmation",
+                        type: "string",
+                        example: "NewPassword123"
+                    ),
+                ]
+            )
+        ),
+        tags: ["Users"],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                ref: "#/components/responses/ValidationError",
+                response: 422
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован"
+            ),
+        ]
+    )]
+    public function changePassword(): void
     {}
 }
