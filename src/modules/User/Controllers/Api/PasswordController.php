@@ -29,6 +29,6 @@ class PasswordController
 
         event(new PasswordUpdatedEvent($result['data']));
 
-        return new SuccessResponse($result['code'], domain: 'password');
+        return new SuccessResponse(code: $result['code'], domain: 'password');
     }
 }
