@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Modules\User\Dto\Auth\LoginData;
 use App\Exceptions\ForbiddenException;
+use Illuminate\Auth\Events\Registered;
 use Modules\User\Dto\Auth\RegisterData;
 use App\Exceptions\UnauthorizedException;
 use Modules\User\Services\Auth\AuthService;
@@ -45,6 +46,8 @@ class AuthController
         {
             $dto = RegisterData::fromRequest($request);
             $result = $this->authService->register($dto);
+
+            event(new Registered($result['user']));
 
             return new AuthSuccessResponse($result['token'], $result['user']);
         }
