@@ -3,7 +3,8 @@ return [
     'errors' => [
         'auth_user_false' => 'Требуется повторная авторизация. Пожалуйста, войдите в систему заново',
         'auth_token_mismatch' => 'Время сессии истекло. Пожалуйста, войдите в систему заново',
-        'auth_token_error' => 'Ошибка аутентификации',
+        'auth_invalid_credentials' => 'Неверные учетные данные',
+        'auth_token_error' => 'Не авторизован',
     ],
     'rules' => [
         'registration_disabled' => 'Регистрация отключена',
