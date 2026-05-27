@@ -10,9 +10,24 @@ use OpenApi\Attributes as OA;
     content: new OA\JsonContent(
         properties: [
             new OA\Property(
+                property: "success",
+                type: "boolean",
+                example: false
+            ),
+            new OA\Property(
                 property: "message",
                 type: "string",
-                example: "Данные недействительны"
+                example: "Ошибка валидации"
+            ),
+            new OA\Property(
+                property: "error_code",
+                type: "string",
+                example: "validation_error"
+            ),
+            new OA\Property(
+                property: "trace_id",
+                type: "string",
+                example: "59ad9bad-0917-42aa-baca-6c1aeb07f021"
             ),
             new OA\Property(
                 property: "errors",
