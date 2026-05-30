@@ -57,7 +57,7 @@ class UserPath
 
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/user/change-password",
-        summary: "Смена пароля пользователя по id",
+        summary: "Смена пароля пользователя",
         security: [['bearerAuth' => []]],
         requestBody: new OA\RequestBody(
             required: true,
