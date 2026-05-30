@@ -11,10 +11,15 @@ class UserController
     public function __construct(protected UserService $userService)
     {
     }
-    public function searchUser(Request $request): JsonResponse
+    public function searchUsers(): JsonResponse
     {
-        $result = $this->userService->searchById(78);
-        $token = $result->createToken('backend-service')->plainTextToken;
+        $result = $this->userService->searchAl();
+
+        return response()->json($result);
+    }
+    public function searchUser($id): JsonResponse
+    {
+        $result = $this->userService->searchById($id);
 
         return response()->json($result);
     }

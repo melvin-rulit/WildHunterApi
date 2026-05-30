@@ -10,7 +10,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/users', [UserController::class, 'searchUser']);
+    Route::get('/users', [UserController::class, 'searchUsers']);
+    Route::get('/user/{user}', [UserController::class, 'searchUser']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/user/change-password', [PasswordController::class, 'updatePassword']);
  });

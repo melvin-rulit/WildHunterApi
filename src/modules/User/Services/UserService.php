@@ -3,9 +3,14 @@
 namespace Modules\User\Services;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserService
 {
+    public function searchAl(): Collection
+    {
+        return User::all();
+    }
     public function searchById(string $id): ?User
     {
         return User::find($id);

@@ -25,9 +25,39 @@ class UserPath
     )]
     public function GetUsers(): void
     {}
+
+    #[OA\Get(
+        path: "/api/" . ApiConfig::VERSION . "/user/{id}",
+        summary: "Получить пользователя",
+        security: [['bearerAuth' => []]],
+        tags: ["Users"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "id пользователя",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "string")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован"
+            ),
+        ]
+    )]
+    public function GetUser(): void
+    {}
+
+
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/user/change-password",
-        summary: "Смена пароля пользователя",
+        summary: "Смена пароля пользователя по id",
         security: [['bearerAuth' => []]],
         requestBody: new OA\RequestBody(
             required: true,
