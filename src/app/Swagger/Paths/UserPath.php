@@ -19,8 +19,13 @@ class UserPath
             ),
             new OA\Response(
                 response: 401,
-                description: "Не авторизован"
-            ),
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
         ]
     )]
     public function GetUsers(): void
@@ -47,8 +52,13 @@ class UserPath
             ),
             new OA\Response(
                 response: 401,
-                description: "Не авторизован"
-            ),
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
         ]
     )]
     public function GetUser(): void
@@ -94,8 +104,13 @@ class UserPath
             ),
             new OA\Response(
                 response: 401,
-                description: "Не авторизован"
-            ),
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
         ]
     )]
     public function changePassword(): void

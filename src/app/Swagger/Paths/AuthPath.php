@@ -74,7 +74,7 @@ class AuthPath
                 description: "Не авторизован",
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: "message", type: "string", example: "Не аутентифицированный")
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
                     ]
                 )
             )
