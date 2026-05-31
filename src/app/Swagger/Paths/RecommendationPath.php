@@ -8,8 +8,8 @@ use OpenApi\Attributes as OA;
 class RecommendationPath
 {
     #[OA\Get(
-        path: "/api/" . ApiConfig::VERSION . "/offers",
-        summary: "Лучшие предложения",
+        path: "/api/" . ApiConfig::VERSION . "/hotels/offers",
+        summary: "Лучшие предложения отелей",
         security: [['bearerAuth' => []]],
         tags: ["Recommendations"],
         responses: [
@@ -32,7 +32,7 @@ class RecommendationPath
     {}
 
     #[OA\Post(
-        path: "/api/" . ApiConfig::VERSION . "/locations",
+        path: "/api/" . ApiConfig::VERSION . "/locations/offers",
         summary: "Лучшие локации",
         security: [['bearerAuth' => []]],
         tags: ["Recommendations"],
