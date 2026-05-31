@@ -33,7 +33,7 @@ class RecommendationPath
 
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/locations/offers",
-        summary: "Лучшие локации",
+        summary: "Лучшие предложения локации",
         security: [['bearerAuth' => []]],
         tags: ["Recommendations"],
         responses: [
