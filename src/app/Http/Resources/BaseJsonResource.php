@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\MissingValue;
 class BaseJsonResource extends JsonResource
 {
     public $needs = [];
+    private mixed $preserveKeys;
 
     public function __construct($resource,$needs = [])
     {
@@ -32,21 +33,16 @@ class BaseJsonResource extends JsonResource
         return func_num_args() === 3 ? value($default) : new MissingValue;
     }
 
-    /**
-     * Create a new anonymous resource collection.
-     *
-     * @param  mixed  $resource
-     * @param  array  $needs
-     *
-     * @return \Illuminate\Support\HigherOrderTapProxy
-     */
-    public static function collection($resource,$needs = []): \Illuminate\Support\HigherOrderTapProxy
+    public static function collection($resource, array $needs = []): BaseResourceCollection
     {
-        return tap(new BaseResourceCollection($resource, static::class), function ($collection) use ($needs) {
-            $collection->needs = $needs;
-            if (property_exists(static::class, 'preserveKeys')) {
-                $collection->preserveKeys = (new static([]))->preserveKeys === true;
-            }
-        });
+        $collection = new BaseResourceCollection($resource, static::class);
+
+        $collection->needs = $needs;
+
+        if (property_exists(static::class, 'preserveKeys')) {
+            $collection->preserveKeys = (new static([]))->preserveKeys === true;
+        }
+
+        return $collection;
     }
 }
