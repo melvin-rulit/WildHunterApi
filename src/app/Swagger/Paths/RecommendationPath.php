@@ -22,11 +22,12 @@ class RecommendationPath
                     new OA\Property(
                         property: "order_direction",
                         type: "string",
-                        example: "desc"
+                        example: "desc",
+                        enum: ["asc", "desc"]
                     ),
                     new OA\Property(
                         property: "limit",
-                        type: "string",
+                        type: "integer",
                         example: "3"
                     ),
                 ]
@@ -54,7 +55,7 @@ class RecommendationPath
 
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/locations/offers",
-        summary: "Лучшие предложения локации",
+        summary: "Лучшие предложения локаций",
         security: [['bearerAuth' => []]],
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(
@@ -67,11 +68,12 @@ class RecommendationPath
                     new OA\Property(
                         property: "order_direction",
                         type: "string",
-                        example: "desc"
+                        example: "desc",
+                        enum: ["asc", "desc"]
                     ),
                     new OA\Property(
                         property: "limit",
-                        type: "string",
+                        type: "integer",
                         example: "3"
                     ),
                 ]
