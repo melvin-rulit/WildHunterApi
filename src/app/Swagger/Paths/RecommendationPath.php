@@ -7,10 +7,31 @@ use OpenApi\Attributes as OA;
 
 class RecommendationPath
 {
-    #[OA\Get(
+    #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/hotels/offers",
         summary: "Лучшие предложения отелей",
         security: [['bearerAuth' => []]],
+        requestBody: new OA\RequestBody(
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(
+                        property: "order_by",
+                        type: "string",
+                        example: "created_at"
+                    ),
+                    new OA\Property(
+                        property: "order_direction",
+                        type: "string",
+                        example: "desc"
+                    ),
+                    new OA\Property(
+                        property: "limit",
+                        type: "string",
+                        example: "3"
+                    ),
+                ]
+            )
+        ),
         tags: ["Recommendations"],
         responses: [
             new OA\Response(
@@ -35,6 +56,27 @@ class RecommendationPath
         path: "/api/" . ApiConfig::VERSION . "/locations/offers",
         summary: "Лучшие предложения локации",
         security: [['bearerAuth' => []]],
+        requestBody: new OA\RequestBody(
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(
+                        property: "order_by",
+                        type: "string",
+                        example: "created_at"
+                    ),
+                    new OA\Property(
+                        property: "order_direction",
+                        type: "string",
+                        example: "desc"
+                    ),
+                    new OA\Property(
+                        property: "limit",
+                        type: "string",
+                        example: "3"
+                    ),
+                ]
+            )
+        ),
         tags: ["Recommendations"],
         responses: [
             new OA\Response(
