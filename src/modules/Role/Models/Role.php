@@ -10,6 +10,11 @@ use Modules\User\Helpers\PermissionHelper;
 //TODO убрать ненужные методы и избавиться от базовой модели
 class Role extends Model
 {
+    const int SUPERADMIN_ID = 1;
+    const string SUPERADMIN = 'superadmin';
+    const string ADMIN = 'baseadmin';
+    const string CUSTOMER = 'hunter';
+
     protected $table = 'core_roles';
 
     protected $fillable = [

@@ -2,8 +2,10 @@
 
 namespace Modules\User\Http\Requests\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Modules\Role\Models\Role;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name'  => ['required', 'string', 'max:255'],
 
-            'role' => ['required', 'in:hunter,baseadmin'],
+            'role' => ['required', Rule::in([Role::CUSTOMER, Role::ADMIN])],
 
             'phone' => ['required', 'string', 'unique:users,phone'],
 
