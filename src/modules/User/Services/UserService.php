@@ -39,7 +39,6 @@ class UserService
         $code = 'subscription_success';
 
         $subscriber = Subscriber::withTrashed()
-            ->with(['user'])
             ->where('email', $dto->email)
             ->first();
 
@@ -49,9 +48,18 @@ class UserService
                 $code = 'subscription_thanks';
             }
         } else {
-            $subscriber = new Subscriber();
-            $subscriber->email = $dto->email;
-            $subscriber->save();
+            $user = User::select('first_name', 'last_name')
+                ->where('email', $dto->email)
+                ->first();
+
+            $newSubscriber = new Subscriber();
+            $newSubscriber->email = $dto->email;
+
+            if ($user) {
+                $newSubscriber->first_name = $user?->first_name;
+                $newSubscriber->last_name = $user?->last_name;
+            }
+            $newSubscriber->save();
         }
 
         return [
