@@ -3,8 +3,9 @@
 namespace Modules\User\Services;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 use Modules\User\Dto\SubscribeData;
+use Modules\User\Models\Subscriber;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserService
 {
@@ -33,10 +34,29 @@ class UserService
             ->get();
     }
 
-    public function subscribe(SubscribeData $dto)
+    public function subscribe(SubscribeData $dto): array
     {
+        $code = 'subscription_success';
+
+        $subscriber = Subscriber::withTrashed()
+            ->with(['user'])
+            ->where('email', $dto->email)
+            ->first();
+
+        if ($subscriber) {
+            if ($subscriber->trashed()) {
+                $subscriber->restore();
+                $code = 'subscription_thanks';
+            }
+        } else {
+            $subscriber = new Subscriber();
+            $subscriber->email = $dto->email;
+            $subscriber->save();
+        }
+
         return [
-            'code' => 'subscription_success',
+            'code' => $code,
+            'subscriber' => $subscriber,
         ];
     }
 }
