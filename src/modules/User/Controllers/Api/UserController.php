@@ -2,9 +2,11 @@
 
 namespace Modules\User\Controllers\Api;
 
+use App\Http\Responses\SuccessResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Modules\User\Dto\SubscribeData;
 use Modules\User\Services\UserService;
+use Modules\User\Http\Requests\SubscribeRequest;
 
 class UserController
 {
@@ -22,5 +24,13 @@ class UserController
         $result = $this->userService->searchById($id);
 
         return response()->json($result);
+    }
+
+    public function subscribe(SubscribeRequest $request): JsonResponse
+    {
+        $dto = SubscribeData::fromRequest($request);
+        $result = $this->userService->subscribe($dto);
+
+        return new SuccessResponse(code: $result['code'], domain: 'user');
     }
 }

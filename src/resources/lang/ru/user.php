@@ -12,6 +12,6 @@ return [
         'privacy_policy_accepted' => 'Необходимо принять политику конфиденциальности.',
     ],
     'successes' => [
-
+        'subscription_success' => 'Вы успешно подписались на рассылку.',
     ]
 ];

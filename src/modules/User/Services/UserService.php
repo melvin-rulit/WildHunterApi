@@ -4,6 +4,7 @@ namespace Modules\User\Services;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\User\Dto\SubscribeData;
 
 class UserService
 {
@@ -30,5 +31,12 @@ class UserService
     })
             ->select(['id', 'user_name', 'first_name', 'last_name'])
             ->get();
+    }
+
+    public function subscribe(SubscribeData $dto)
+    {
+        return [
+            'code' => 'subscription_success',
+        ];
     }
 }
