@@ -40,6 +40,10 @@ class HotelsPath
                 response: 200
             ),
             new OA\Response(
+                ref: "#/components/responses/ValidationError",
+                response: 422
+            ),
+            new OA\Response(
                 response: 401,
                 description: "Не авторизован",
                 content: new OA\JsonContent(
