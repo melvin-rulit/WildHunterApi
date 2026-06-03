@@ -49,4 +49,8 @@ class Hotel extends Bookable
     {
         return setting_item('hotel_disable') == false;
     }
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'publish');
+    }
 }
