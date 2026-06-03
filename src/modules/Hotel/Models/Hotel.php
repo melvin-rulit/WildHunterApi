@@ -44,4 +44,9 @@ class Hotel extends Bookable
     {
         return __("hotel.name.model_name");
     }
+
+    public static function isEnable(): bool
+    {
+        return setting_item('hotel_disable') == false;
+    }
 }
