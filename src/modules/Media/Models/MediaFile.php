@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class MediaFile extends BaseModel
 {
@@ -27,10 +28,29 @@ class MediaFile extends BaseModel
         return $query->where('folder_id', $folder_id);
     }
 
-    public function forceDelete()
+    public function forceDelete(): bool
     {
         Cache::forget($this->cacheKey() . ':' . $this->id);
         return parent::forceDelete();
+    }
+
+    public function viewUrl(): Attribute
+    {
+        return Attribute::make(
+            get:function(){
+                return match ($this->driver) {
+                    "s3", "gcs" => $this->generateUrl($this->file_path),
+                    default => asset('uploads/' . $this->file_path),
+                };
+            }
+        );
+    }
+
+    public function generateUrl($file_path, int $mins = 24 * 60): string
+    {
+        return Storage::disk($this->driver)->temporaryUrl(
+            $file_path, now()->addMinutes($mins)
+        );
     }
 
     public function download($name = '',$headers = [])
