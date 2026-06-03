@@ -4,8 +4,10 @@
 
     use App\Models\BaseModel;
     use Kalnoy\Nestedset\NodeTrait;
+    use Modules\Hotel\Models\Hotel;
     use Modules\Media\Helpers\FileHelper;
     use Illuminate\Database\Eloquent\SoftDeletes;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
 
     class Location extends BaseModel
     {
@@ -45,5 +47,10 @@
         public function scopePublished($query)
         {
             return $query->where('status', 'publish');
+        }
+
+        public function hotel(): HasMany
+        {
+            return $this->hasMany(Hotel::class, 'location_id');
         }
     }
