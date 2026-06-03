@@ -2,9 +2,13 @@
 
 namespace Modules\User\Services\Auth;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Modules\User\Dto\Auth\LoginData;
+use Illuminate\Support\Facades\Crypt;
 use Modules\User\Services\UserService;
+use App\Exceptions\ForbiddenException;
+use Modules\User\Dto\Auth\RegisterData;
 use App\Exceptions\UnauthorizedException;
 
 class AuthService
@@ -22,12 +26,45 @@ class AuthService
 
         if (! $user || ! Hash::check($dto->password, $user->password)) {
             throw new UnauthorizedException(
-                errorCode: 'auth_token_error',
+                errorCode: 'auth_invalid_credentials',
                 domain: 'auth'
             );
         }
 
         $token = $user->createToken('api_token')->plainTextToken;
+
+        return [
+            'user' => $user,
+            'token' => $token,
+        ];
+    }
+
+    /**
+     * @throws ForbiddenException
+     */
+    public function register(RegisterData $dto): array
+    {
+        if(!is_enable_registration()){
+            throw new ForbiddenException(
+               errorCode: 'registration_disabled',
+               domain: 'auth'
+            );
+        }
+
+        $user = User::create([
+            'first_name' => $dto->first_name,
+            'last_name'  => $dto->last_name,
+            'email'      => $dto->email,
+            'password'   => Hash::make($dto->password),
+            'current_password' => Crypt::encryptString($dto->password),
+            'status'    => 'publish',
+            'phone'    => $dto->phone,
+            'locale'   => setting_item('site_locale') ?? 'en',
+        ]);
+
+        $user->assignRole($dto->role);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return [
             'user' => $user,
