@@ -49,7 +49,7 @@
             return $query->where('status', 'publish');
         }
 
-        public function hotel(): HasMany
+        public function hotels(): HasMany
         {
             return $this->hasMany(Hotel::class, 'location_id');
         }
