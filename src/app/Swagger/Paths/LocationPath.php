@@ -9,6 +9,7 @@ class LocationPath
 {
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/locations/offers",
+        description: "Выводит список локаций и количество отелей в ней",
         summary: "Лучшие предложения локаций",
         security: [['bearerAuth' => []]],
         requestBody: new OA\RequestBody(
