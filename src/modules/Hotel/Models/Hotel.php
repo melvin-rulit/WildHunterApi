@@ -4,9 +4,10 @@ namespace Modules\Hotel\Models;
 
 use App\Observers\HotelObserver;
 use Modules\Booking\Models\Bookable;
+use Modules\Media\Helpers\FileHelper;
+use Illuminate\Notifications\Notifiable;
 //use Modules\Booking\Traits\CapturesService;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Notifications\Notifiable;
 
 class Hotel extends Bookable
 {
@@ -48,6 +49,12 @@ class Hotel extends Bookable
     public static function isEnable(): bool
     {
         return setting_item('hotel_disable') == false;
+    }
+
+    public function getImageUrl($size = "medium")
+    {
+        $url = FileHelper::url($this->image_id, $size);
+        return $url ? $url : '';
     }
     public function scopePublished($query)
     {
