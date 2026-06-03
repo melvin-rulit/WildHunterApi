@@ -2,7 +2,7 @@
 
 namespace Modules\User\Models;
 
-use App\BaseModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subscriber extends BaseModel
