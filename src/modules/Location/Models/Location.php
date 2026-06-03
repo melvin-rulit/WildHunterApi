@@ -37,6 +37,10 @@
         {
             return __("location.name.model_name");
         }
+        public static function isEnable(): bool
+        {
+            return setting_item('location_disable') == false;
+        }
 
         public function getImageUrl($size = "medium")
         {

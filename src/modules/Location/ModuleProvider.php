@@ -14,7 +14,7 @@ class ModuleProvider extends ModuleServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/Database/Migrations');
         $this->mergeConfigFrom(__DIR__ . '/Configs/config.php', 'location');
 
-        if (is_installed()) {
+        if (is_installed() and Location::isEnable()) {
             $sitemapHelper->add("location", [app()->make(Location::class), 'getForSitemap']);
         }
     }
