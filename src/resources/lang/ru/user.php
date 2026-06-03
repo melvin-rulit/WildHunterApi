@@ -13,5 +13,6 @@ return [
     ],
     'successes' => [
         'subscription_success' => 'Вы успешно подписались на рассылку.',
+        'subscription_thanks' => 'Спасибо за подписку.',
     ]
 ];
