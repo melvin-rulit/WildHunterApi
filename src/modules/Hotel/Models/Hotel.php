@@ -4,7 +4,7 @@ namespace Modules\Hotel\Models;
 
 use App\Observers\HotelObserver;
 use Modules\Booking\Models\Bookable;
-use Modules\Booking\Traits\CapturesService;
+//use Modules\Booking\Traits\CapturesService;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
@@ -12,7 +12,7 @@ class Hotel extends Bookable
 {
     use SoftDeletes;
     use Notifiable;
-    use CapturesService;
+//    use CapturesService;
     protected $table                              = 'bc_hotels';
     public    $type                               = 'hotel';
     protected $fillable      = [
