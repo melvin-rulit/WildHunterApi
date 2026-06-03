@@ -2,8 +2,9 @@
 
     namespace Modules\Location\Models;
 
-    use App\BaseModel;
+    use App\Models\BaseModel;
     use Kalnoy\Nestedset\NodeTrait;
+    use Modules\Media\Helpers\FileHelper;
     use Illuminate\Database\Eloquent\SoftDeletes;
 
     class Location extends BaseModel
@@ -23,9 +24,9 @@
             'banner_image_id',
             'trip_ideas',
         ];
-        protected $slugField     = 'slug';
-        protected $slugFromField = 'name';
-        protected $seo_type      = 'location';
+        protected string $slugField     = 'slug';
+        protected string $slugFromField = 'name';
+        protected string $seo_type      = 'location';
         protected $casts         = [
             'trip_ideas' => 'array'
         ];
@@ -33,5 +34,16 @@
         public static function getModelName()
         {
             return __("location.name.model_name");
+        }
+
+        public function getImageUrl($size = "medium")
+        {
+            $url = FileHelper::url($this->image_id, $size);
+            return $url ? $url : '';
+        }
+
+        public function scopePublished($query)
+        {
+            return $query->where('status', 'publish');
         }
     }
