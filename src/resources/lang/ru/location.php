@@ -1,5 +1,8 @@
 <?php
 return [
+    'name' => [
+        'model_name' => 'Локации',
+    ],
     'errors' => [
 
     ],
