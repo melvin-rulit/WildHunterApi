@@ -10,6 +10,7 @@ class LocationService
     public function getLocations(LocationFilterData $dto): array
     {
         $locations = Location::published()
+            ->withCount('hotels')
             ->when($dto->order_by, function ($q) use ($dto) {
                 $q->orderBy($dto->order_by, $dto->order_direction ?? 'asc');
             })

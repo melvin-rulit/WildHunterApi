@@ -12,7 +12,8 @@ class LocationResource extends BaseJsonResource
             'id' => $this->resource->id,
             'name'=> $this->resource->name,
             'slug'=> $this->resource->slug,
-            'image_url'=> $this->resource->getImageUrl(),
+            'image_url' => $this->resource->getImageUrl(),
+            'hotel_count' => $this->resource->hotels->count(),
         ];
     }
 }
