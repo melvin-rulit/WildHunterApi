@@ -12,6 +12,7 @@ class ModuleProvider extends ModuleServiceProvider
     public function boot(SitemapHelper $sitemapHelper): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/Database/Migrations');
+        $this->mergeConfigFrom(__DIR__ . '/Configs/config.php', 'role');
 
         if (is_installed()) {
             $sitemapHelper->add("location", [app()->make(Location::class), 'getForSitemap']);
