@@ -10,17 +10,25 @@ class RoleService
 {
     public function roles(): Collection
     {
-        return Role::all();
+        return Role::query()
+            ->where('id', '!=', Role::SUPERADMIN_ID)
+            ->get();
     }
 
     public function getById($id): ?Role
     {
-        return Role::find($id);
+        return Role::query()
+            ->where('id', $id)
+            ->where('id', '!=', Role::SUPERADMIN_ID)
+            ->first();
     }
 
     public function getByCode($code): ?Role
     {
-        return Role::where('code', $code)->first();
+        return Role::query()
+            ->where('code', $code)
+            ->where('code', '!=', Role::SUPERADMIN)
+            ->first();
     }
 
     public function getUserRole(User $user)
