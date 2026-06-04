@@ -2,10 +2,12 @@
 
 namespace Modules\Role\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
+use App\Models\User;
 use Illuminate\Support\Str;
-use Modules\User\Helpers\PermissionHelper;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\Model;
+//use Modules\User\Helpers\PermissionHelper;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 //TODO убрать ненужные методы и избавиться от базовой модели
 class Role extends Model
@@ -21,6 +23,11 @@ class Role extends Model
         'code',
         'name'
     ];
+
+    public function scopeWithoutSuperadmin($query)
+    {
+        return $query->where('code', '!=', self::SUPERADMIN);
+    }
 
     /**
      * Check Role has Permission
@@ -82,15 +89,17 @@ class Role extends Model
 //        }
 //    }
 
-    public function permissions(){
+    public function permissions(): HasMany
+    {
         return $this->hasMany(RolePermission::class,'role_id');
     }
 
-//    public static function findOrCreate($name){
-//        return parent::firstOrCreate(['name'=>$name,'code'=>Str::slug($name,'_')]);
-//    }
+    public static function findOrCreate($name){
+        return parent::firstOrCreate(['name'=>$name,'code'=>Str::slug($name,'_')]);
+    }
 
-    public function users(){
-        return $this->hasMany(\App\User::class,'role_id');
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class,'role_id');
     }
 }

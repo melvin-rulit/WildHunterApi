@@ -11,23 +11,23 @@ class RoleService
     public function roles(): Collection
     {
         return Role::query()
-            ->where('id', '!=', Role::SUPERADMIN_ID)
+            ->withoutSuperadmin()
             ->get();
     }
 
     public function getById($id): ?Role
     {
         return Role::query()
+            ->withoutSuperadmin()
             ->where('id', $id)
-            ->where('id', '!=', Role::SUPERADMIN_ID)
             ->first();
     }
 
     public function getByCode($code): ?Role
     {
         return Role::query()
+            ->withoutSuperadmin()
             ->where('code', $code)
-            ->where('code', '!=', Role::SUPERADMIN)
             ->first();
     }
 
