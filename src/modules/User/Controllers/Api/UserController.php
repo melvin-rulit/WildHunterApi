@@ -4,6 +4,7 @@ namespace Modules\User\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use Modules\User\Dto\SubscribeData;
+use Modules\User\Http\Resources\UserResource;
 use Modules\User\Services\UserService;
 use App\Http\Responses\SuccessResponse;
 use Modules\User\Events\UserSubscriberSubmit;
@@ -14,17 +15,17 @@ class UserController
     public function __construct(protected UserService $userService)
     {
     }
-    public function searchUsers(): JsonResponse
+    public function searchUsers(): UserResource
     {
         $result = $this->userService->searchAl();
 
-        return response()->json($result);
+        return new UserResource($result);
     }
-    public function searchUser($id): JsonResponse
+    public function searchUser($id): UserResource
     {
         $result = $this->userService->searchById($id);
 
-        return response()->json($result);
+        return new UserResource($result);
     }
 
     public function subscribe(SubscribeRequest $request): JsonResponse
