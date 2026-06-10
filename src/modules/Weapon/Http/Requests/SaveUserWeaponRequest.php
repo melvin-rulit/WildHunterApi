@@ -13,7 +13,7 @@ class SaveUserWeaponRequest extends FormRequest
             'hunter_billet_number' => ['required', 'string', 'max:255'],
             'hunter_license_number' => ['required', 'string', 'max:255'],
             'hunter_license_date' => ['required', 'date'],
-            'weapon_type_id' => ['required', 'integer', 'exists:weapon_types,id'],
+            'weapon_type_id' => ['required', 'integer', 'exists:bc_weapons,id'],
             'caliber' => ['required', 'string', 'max:50'],
         ];
     }
