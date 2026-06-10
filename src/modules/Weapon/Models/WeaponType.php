@@ -2,10 +2,8 @@
 
 namespace Modules\Weapon\Models;
 
-use App\Models\User;
 use Modules\Booking\Models\Bookable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WeaponType extends Bookable
 {
