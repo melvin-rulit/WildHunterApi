@@ -2,6 +2,7 @@
 
 namespace Modules\Weapon\Services;
 
+use Modules\User\Models\UserWeapon;
 use Modules\Weapon\Models\Caliber;
 use Modules\Weapon\Models\WeaponType;
 use Modules\Weapon\Dto\SaveUserWeaponData;
@@ -20,7 +21,7 @@ class WeaponService
 
     public function storeUserWeapon($userId, SaveUserWeaponData $dto): array
     {
-        WeaponType::crete([
+        UserWeapon::create([
             'user_id' => $userId,
             'hunter_billet_number' => $dto->hunter_billet_number,
             'hunter_license_number' => $dto->hunter_license_number,
