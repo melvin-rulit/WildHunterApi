@@ -166,4 +166,61 @@ class UserPath
     )]
     public function subscribeNewsletter(): void
     {}
+    #[OA\POST(
+        path: "/api/" . ApiConfig::VERSION . "/user/weapons/",
+        summary: "Сохранить оружие для пользователя",
+        security: [['bearerAuth' => []]],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["hunter_billet_number", "hunter_license_number", "hunter_license_date", "weapon_type_id", "caliber"],
+                properties: [
+                    new OA\Property(
+                        property: "hunter_billet_number",
+                        type: "string",
+                        example: "123456"
+                    ),
+                    new OA\Property(
+                        property: "hunter_license_number",
+                        type: "string",
+                        example: "7891011"
+                    ),
+                    new OA\Property(
+                        property: "hunter_license_date",
+                        type: "string",
+                        format: "date",
+                        example: "2026-01-01"
+                    ),
+                    new OA\Property(
+                        property: "weapon_type_id",
+                        type: "integer",
+                        example: 1
+                    ),
+                    new OA\Property(
+                        property: "caliber",
+                        type: "string",
+                        example: "20"
+                    )
+                ]
+            )
+        ),
+        tags: ["Weapons"],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
+        ]
+    )]
+    public function SaveWeapons(): void
+    {}
 }
