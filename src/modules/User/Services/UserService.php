@@ -11,15 +11,15 @@ class UserService
 {
     public function searchAl(): Collection
     {
-        return User::all();
+        return User::with(['role', 'weapons'])->all();
     }
     public function searchById(string $id): ?User
     {
-        return User::find($id);
+        return User::with(['role', 'weapons'])->find($id);
     }
     public function findByEmail(string $email): ?User
     {
-        return User::firstWhere('email', $email);
+        return User::with(['role', 'weapons'])->firstWhere('email', $email);
     }
     public function searchByQuery(string $query)
     {

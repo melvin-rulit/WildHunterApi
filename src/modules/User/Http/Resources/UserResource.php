@@ -24,11 +24,7 @@ class UserResource extends BaseJsonResource
             'current_password' => $this->resource->current_password,
             'is_verified' => $this->resource->is_verified,
             'status' => $this->resource->status,
-            'hunter_billet_number' => $this->resource->hunter_billet_number,
-            'hunter_license_number' => $this->resource->hunter_license_number,
-            'hunter_license_date' => $this->resource->hunter_license_date,
-            'weapon_type_id' => $this->resource->weapon_type_id,
-            'caliber' => $this->resource->caliber,
+            'weapons' => UserWeaponResource::collection($this->resource->weapons),
         ];
     }
 }
