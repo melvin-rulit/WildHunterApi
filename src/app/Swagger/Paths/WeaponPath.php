@@ -29,7 +29,33 @@ class WeaponPath
         ]
     )]
     public function GetWeapons(): void
-    {}    #[OA\Get(
+    {}
+
+    #[OA\POST(
+        path: "/api/" . ApiConfig::VERSION . "/weapon/user/{id}",
+        summary: "Сохранить оружие для пользователя",
+        security: [['bearerAuth' => []]],
+        tags: ["Weapons"],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
+        ]
+    )]
+    public function SaveWeapons(): void
+    {}
+
+     #[OA\Get(
         path: "/api/" . ApiConfig::VERSION . "/calibers",
         summary: "Получить калибр оружий",
         security: [['bearerAuth' => []]],
