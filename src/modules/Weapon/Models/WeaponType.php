@@ -2,10 +2,10 @@
 
 namespace Modules\Weapon\Models;
 
-use Modules\User\Models\User;
-use Modules\Booking\Models\Booking;
+use App\Models\User;
 use Modules\Booking\Models\Bookable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WeaponType extends Bookable
 {
@@ -19,10 +19,6 @@ class WeaponType extends Bookable
         return true;
     }
 
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class, 'weapon_type_id');
-    }
     public function calibers(): HasMany
     {
         return $this->hasMany(Caliber::class);

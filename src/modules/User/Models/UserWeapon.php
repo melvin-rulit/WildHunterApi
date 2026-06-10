@@ -29,4 +29,8 @@ class UserWeapon extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(WeaponType::class, 'weapon_type_id');
+    }
 }
