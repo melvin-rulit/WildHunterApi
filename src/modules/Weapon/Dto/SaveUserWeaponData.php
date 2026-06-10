@@ -12,7 +12,7 @@ class SaveUserWeaponData
         public string $hunter_license_number,
         public Carbon $hunter_license_date,
         public int $weapon_type_id,
-        public string $caliber,
+        public int $caliber,
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -24,7 +24,7 @@ class SaveUserWeaponData
             hunter_license_number: $data['hunter_license_number'],
             hunter_license_date: Carbon::parse($data['hunter_license_date']),
             weapon_type_id: (int) $data['weapon_type_id'],
-            caliber: $data['caliber'],
+            caliber: (int) $data['caliber'],
         );
     }
 }
