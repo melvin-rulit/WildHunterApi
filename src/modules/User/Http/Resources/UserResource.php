@@ -24,6 +24,7 @@ class UserResource extends BaseJsonResource
             'current_password' => $this->resource->current_password,
             'is_verified' => $this->resource->is_verified,
             'status' => $this->resource->status,
+            'created_at' => $this->resource->created_at?->translatedFormat('d F Y г.'),
             'weapons' => UserWeaponResource::collection($this->resource->weapons),
         ];
     }
