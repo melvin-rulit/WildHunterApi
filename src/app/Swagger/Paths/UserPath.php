@@ -64,6 +64,61 @@ class UserPath
     public function GetUser(): void
     {}
 
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/user",
+        summary: "Обновить данные пользователя",
+        security: [['bearerAuth' => []]],
+        requestBody: new OA\RequestBody(
+            content: new OA\MediaType(
+                mediaType: "multipart/form-data",
+                schema: new OA\Schema(
+                    properties: [
+                        new OA\Property(property: "first_name", type: "string"),
+                        new OA\Property(property: "last_name", type: "string"),
+                        new OA\Property(property: "nik", type: "string"),
+                        new OA\Property(property: "birthday", type: "string"),
+                        new OA\Property(property: "email", type: "string"),
+                        new OA\Property(property: "phone", type: "string"),
+                        new OA\Property(property: "city", type: "string"),
+                        new OA\Property(property: "address", type: "string"),
+                        new OA\Property(property: "hunter_billet_number", type: "string"),
+                        new OA\Property(property: "bio", type: "string"),
+
+                        new OA\Property(
+                            property: "avatar",
+                            type: "string",
+                            format: "binary"
+                        ),
+                    ],
+                    type: "object"
+                )
+            )
+        ),
+        tags: ["Users"],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                ref: "#/components/responses/ValidationError",
+                response: 422
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
+        ]
+    )]
+    public function store(): void
+    {
+    }
+
 
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/user/change-password",
@@ -167,7 +222,7 @@ class UserPath
     public function subscribeNewsletter(): void
     {}
     #[OA\POST(
-        path: "/api/" . ApiConfig::VERSION . "/user/weapons/",
+        path: "/api/" . ApiConfig::VERSION . "/user/weapons",
         summary: "Сохранить оружие для пользователя",
         security: [['bearerAuth' => []]],
         requestBody: new OA\RequestBody(
