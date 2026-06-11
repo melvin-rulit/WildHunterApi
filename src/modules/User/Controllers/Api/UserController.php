@@ -3,6 +3,7 @@
 namespace Modules\User\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Modules\User\Dto\SubscribeData;
 use Modules\User\Services\UserService;
 use App\Http\Responses\SuccessResponse;
@@ -24,6 +25,13 @@ class UserController
     public function searchUser($id): JsonResponse
     {
         $result = $this->userService->searchById($id);
+
+        return new SuccessResponse(data: new UserResource($result));
+    }
+
+    public function profileUpdate(): JsonResponse
+    {
+        $result = $this->userService->update(Auth::user());
 
         return new SuccessResponse(data: new UserResource($result));
     }
