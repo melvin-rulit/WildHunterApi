@@ -13,7 +13,7 @@ class UserWeaponResource extends BaseJsonResource
             'hunter_license_number' => $this->resource->hunter_license_number,
             'hunter_license_date' => $this->resource->hunter_license_date,
             'weapon_type' => $this->resource->type?->title,
-            'caliber' => $this->resource->caliber,
+            'caliber' => $this->resource->caliber?->title,
         ];
     }
 }

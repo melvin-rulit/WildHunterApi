@@ -11,19 +11,19 @@ class UserService
 {
     public function searchAl(): Collection
     {
-        return User::with(['role', 'weapons', 'weapons.type'])->all();
+        return User::with(['role', 'weapons', 'weapons.type', 'weapons.caliber'])->all();
     }
     public function searchById(string $id): ?User
     {
-        return User::with(['role', 'weapons', 'weapons.type'])->find($id);
+        return User::with(['role', 'weapons', 'weapons.type', 'weapons.caliber'])->find($id);
     }
     public function findByEmail(string $email): ?User
     {
-        return User::with(['role', 'weapons', 'weapons.type'])->firstWhere('email', $email);
+        return User::with(['role', 'weapons', 'weapons.type', 'weapons.caliber'])->firstWhere('email', $email);
     }
     public function searchByQuery(string $query): Collection
     {
-        return  User::with(['role', 'weapons', 'weapons.type'])->where(function ($q) use ($query) {
+        return  User::with(['role', 'weapons', 'weapons.type', 'weapons.caliber'])->where(function ($q) use ($query) {
         $q->where('user_name', 'LIKE', $query.'%')
             ->orWhere('first_name', 'LIKE', $query.'%')
             ->orWhere('last_name', 'LIKE', $query.'%')

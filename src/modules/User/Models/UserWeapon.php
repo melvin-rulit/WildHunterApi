@@ -18,7 +18,7 @@ class UserWeapon extends Model
         'hunter_license_number',
         'hunter_license_date',
         'weapon_type_id',
-        'caliber',
+        'caliber_id',
     ];
 
     protected $casts = [
@@ -32,5 +32,9 @@ class UserWeapon extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(WeaponType::class, 'weapon_type_id');
+    }
+    public function caliber(): BelongsTo
+    {
+        return $this->belongsTo(Caliber::class, 'caliber_id');
     }
 }
