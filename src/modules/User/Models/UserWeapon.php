@@ -22,7 +22,7 @@ class UserWeapon extends Model
     ];
 
     protected $casts = [
-        'license_date' => 'date',
+        'hunter_license_date' => 'date',
     ];
 
     public function user(): BelongsTo
