@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Modules\User\Dto\SubscribeData;
 use Modules\User\Services\UserService;
 use App\Http\Responses\SuccessResponse;
+use Modules\User\Dto\ProfileUpdateData;
 use Modules\User\Http\Resources\UserResource;
 use Modules\User\Events\UserSubscriberSubmit;
 use Modules\User\Http\Requests\SubscribeRequest;
+use Modules\User\Http\Requests\ProfileUpdateRequest;
 
 class UserController
 {
@@ -29,11 +31,12 @@ class UserController
         return new SuccessResponse(data: new UserResource($result));
     }
 
-    public function profileUpdate(): JsonResponse
+    public function profileUpdate(ProfileUpdateRequest $request): JsonResponse
     {
-        $result = $this->userService->update(Auth::user());
+        $dto = ProfileUpdateData::fromRequest($request);
+        $result = $this->userService->update(Auth::user(), $dto);
 
-        return new SuccessResponse(data: new UserResource($result));
+        return new SuccessResponse(code: $result['code'], domain: 'user', data: new UserResource($result['user']));
     }
 
     public function subscribe(SubscribeRequest $request): JsonResponse
