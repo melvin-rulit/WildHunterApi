@@ -1,0 +1,64 @@
+<?php
+
+namespace Modules\User\Http\Requests;
+
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Foundation\Http\FormRequest;
+
+class ProfileUpdateRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'first_name' => ['nullable', 'string', 'max:255'],
+            'last_name' => ['nullable', 'string', 'max:255'],
+            'nik' => ['nullable', 'string', 'max:255'],
+
+            'birthday' => ['nullable', 'date'],
+
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:30'],
+
+            'city' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+
+            'hunter_billet_number' => ['nullable', 'string', 'max:255'],
+
+            'bio' => ['nullable', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'first_name.string' => __('user.validation.profile.first_name_string'),
+            'first_name.max' => __('user.validation.profile.first_name_max'),
+
+            'last_name.string' => __('user.validation.profile.last_name_string'),
+            'last_name.max' => __('user.validation.profile.last_name_max'),
+
+            'nik.string' => __('user.validation.profile.nik_string'),
+            'nik.max' => __('user.validation.profile.nik_max'),
+
+            'birthday.date' => __('user.validation.profile.birthday_date'),
+
+            'email.required' => __('user.validation.profile.email_required'),
+            'email.email' => __('user.validation.profile.email_invalid'),
+            'email.max' => __('user.validation.profile.email_max'),
+
+            'phone.string' => __('user.validation.profile.phone_string'),
+            'phone.max' => __('user.validation.profile.phone_max'),
+
+            'city.string' => __('user.validation.profile.city_string'),
+            'city.max' => __('user.validation.profile.city_max'),
+
+            'address.string' => __('user.validation.profile.address_string'),
+            'address.max' => __('user.validation.profile.address_max'),
+
+            'hunter_billet_number.string' => __('user.validation.profile.hunter_billet_number_string'),
+            'hunter_billet_number.max' => __('user.validation.profile.hunter_billet_number_max'),
+
+            'bio.string' => __('user.validation.profile.bio_string'),
+        ];
+    }
+}
