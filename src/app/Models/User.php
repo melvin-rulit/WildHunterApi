@@ -47,9 +47,9 @@ class User extends Authenticatable
             'created_at' => 'date',
         ];
     }
-    public function getDisplayNameAttribute(): string
+    public function updateFullName(): void
     {
-        return $this->first_name . ' ' . $this->last_name;
+        $this->name = trim("{$this->first_name} {$this->last_name}");
     }
     protected function roleName():Attribute{
         return Attribute::make(
