@@ -5,6 +5,7 @@ namespace Modules\User\Services;
 use App\Models\User;
 use Modules\User\Dto\SubscribeData;
 use Modules\User\Models\Subscriber;
+use Modules\User\Dto\ProfileUpdateData;
 use Illuminate\Database\Eloquent\Collection;
 
 class UserService
@@ -32,6 +33,30 @@ class UserService
     })
             ->select(['id', 'user_name', 'first_name', 'last_name'])
             ->get();
+    }
+
+    public function update($user, ProfileUpdateData $dto): array
+    {
+        $user->fill(array_filter([
+            'first_name' => $dto->first_name,
+            'last_name' => $dto->last_name,
+            'user_name' => $dto->nik,
+            'email' => $dto->email,
+            'phone' => $dto->phone,
+            'city' => $dto->city,
+            'address' => $dto->address,
+            'birthday' => date("Y-m-d", strtotime($dto->birthday)),
+            'hunter_billet_number' => $dto->hunter_billet_number,
+        ], fn($v) => $v !== null));
+
+        $user->bio = $dto->bio ? clean($dto->bio) : null;
+        $user->updateFullName();
+        $user->save();
+
+        return [
+            'code' => 'update_success',
+            'user' => $user,
+        ];
     }
 
     public function subscribe(SubscribeData $dto): array
