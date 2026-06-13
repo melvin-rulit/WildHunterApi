@@ -12,6 +12,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users', [UserController::class, 'searchUsers']);
     Route::get('/user/{user}', [UserController::class, 'searchUser']);
+    Route::post('/user', [UserController::class, 'profileUpdate']);
 
     //Newsletter
     Route::post('/user/newsletter/subscribe',[UserController::class, 'subscribe']);
