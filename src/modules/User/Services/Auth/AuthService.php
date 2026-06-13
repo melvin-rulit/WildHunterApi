@@ -3,6 +3,7 @@
 namespace Modules\User\Services\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Modules\User\Dto\Auth\LoginData;
 use Illuminate\Support\Facades\Crypt;
@@ -54,6 +55,7 @@ class AuthService
         $user = User::create([
             'first_name' => $dto->first_name,
             'last_name'  => $dto->last_name,
+            'user_name' => Str::slug("{$dto->first_name}_{$dto->last_name}", '_'),
             'email'      => $dto->email,
             'password'   => Hash::make($dto->password),
             'current_password' => Crypt::encryptString($dto->password),
