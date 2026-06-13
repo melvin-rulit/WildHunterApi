@@ -4,8 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,19 +13,31 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Role\Models\Role;
 use Modules\User\Models\UserWeapon;
+use Modules\User\Traits\HasRoles;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+    protected $fillable = [
+        'name',
+        'first_name',
+        'last_name',
+        'user_name',
+        'email',
+        'nik',
+        'phone',
+        'city',
+        'address',
+        'birthday',
+        'hunter_billet_number',
+        'password'
+    ];
     protected function casts(): array
     {
         return [
@@ -37,8 +47,10 @@ class User extends Authenticatable
             'created_at' => 'date',
         ];
     }
-
-
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
     protected function roleName():Attribute{
         return Attribute::make(
             get:function(){
