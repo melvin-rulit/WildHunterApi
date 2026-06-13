@@ -69,26 +69,23 @@ class UserPath
         summary: "Обновить данные пользователя",
         security: [['bearerAuth' => []]],
         requestBody: new OA\RequestBody(
+            required: true,
             content: new OA\MediaType(
                 mediaType: "multipart/form-data",
                 schema: new OA\Schema(
+                    required: ["email"],
                     properties: [
-                        new OA\Property(property: "first_name", type: "string"),
-                        new OA\Property(property: "last_name", type: "string"),
-                        new OA\Property(property: "nik", type: "string"),
-                        new OA\Property(property: "birthday", type: "string"),
-                        new OA\Property(property: "email", type: "string"),
-                        new OA\Property(property: "phone", type: "string"),
-                        new OA\Property(property: "city", type: "string"),
-                        new OA\Property(property: "address", type: "string"),
-                        new OA\Property(property: "hunter_billet_number", type: "string"),
-                        new OA\Property(property: "bio", type: "string"),
-
-                        new OA\Property(
-                            property: "avatar",
-                            type: "string",
-                            format: "binary"
-                        ),
+                        new OA\Property(property: "first_name", type: "string", example: ""),
+                        new OA\Property(property: "last_name", type: "string", example: ""),
+                        new OA\Property(property: "nik", type: "string", example: ""),
+                        new OA\Property(property: "birthday", type: "string", example: ""),
+                        new OA\Property(property: "email", type: "string", example: "test@mail.com"),
+                        new OA\Property(property: "phone", type: "string", example: ""),
+                        new OA\Property(property: "city", type: "string", example: ""),
+                        new OA\Property(property: "address", type: "string", example: ""),
+                        new OA\Property(property: "hunter_billet_number", type: "string", example: ""),
+                        new OA\Property(property: "bio", type: "string", example: ""),
+                        new OA\Property(property: "avatar", type: "string", format: "binary"),
                     ],
                     type: "object"
                 )
@@ -115,7 +112,7 @@ class UserPath
             )
         ]
     )]
-    public function store(): void
+    public function profileUpdate(): void
     {
     }
 
