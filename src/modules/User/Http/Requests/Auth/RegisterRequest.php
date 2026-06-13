@@ -53,6 +53,7 @@ class RegisterRequest extends FormRequest
             'password.min'      => __('auth.validation.password_min'),
             'password.mixed'  => __('auth.validation.password_upper_lower'),
             'password.numbers' => __('auth.validation.password_number'),
+            'password.uncompromised' => __('auth.validation.password_compromised'),
 
             'term.required'  => __('auth.validation.term_required'),
             'term.accepted'  => __('auth.validation.term_accepted'),
