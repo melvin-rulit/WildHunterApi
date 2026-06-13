@@ -85,6 +85,7 @@ class AuthPath
 
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/register",
+        description: "Возвращается токен, чтобы после регистрации сразу аутентифицировать пользователя",
         summary: "Регистрация пользователя",
         requestBody: new OA\RequestBody(
             required: true,
