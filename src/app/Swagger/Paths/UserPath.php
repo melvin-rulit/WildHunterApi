@@ -256,7 +256,7 @@ class UserPath
                 ]
             )
         ),
-        tags: ["Weapons"],
+        tags: ["Users"],
         responses: [
             new OA\Response(
                 ref: "#/components/responses/SuccessResponse",

@@ -10,7 +10,6 @@ class SaveUserWeaponRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'hunter_billet_number' => ['required', 'string', 'max:255'],
             'hunter_license_number' => ['required', 'string', 'max:255'],
             'hunter_license_date' => ['required', 'date'],
             'weapon_type_id' => ['required', 'integer', 'exists:bc_weapons,id'],
@@ -21,9 +20,6 @@ class SaveUserWeaponRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'hunter_billet_number.required' => __('weapon.validation.hunter_billet_number_required'),
-            'hunter_billet_number.string' => __('weapon.validation.hunter_billet_number_string'),
-
             'hunter_license_number.required' => __('weapon.validation.hunter_license_number_required'),
             'hunter_license_number.string' => __('weapon.validation.hunter_license_number_string'),
 

@@ -3,11 +3,8 @@ namespace Modules\Weapon\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Responses\SuccessResponse;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\User\Models\UserWeapon;
 use Modules\Weapon\Dto\SaveUserWeaponData;
 use Modules\Weapon\Http\Requests\SaveUserWeaponRequest;
 use Modules\Weapon\Http\Resources\CaliberResource;

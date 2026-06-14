@@ -10,9 +10,6 @@ return [
 
     ],
     'validation' => [
-        'hunter_billet_number_required' => 'Номер билета обязателен',
-        'hunter_billet_number_string' => 'Номер билета должен быть строкой',
-
         'hunter_license_number_required' => 'Номер лицензии обязателен',
         'hunter_license_number_string' => 'Номер лицензии должен быть строкой',
 

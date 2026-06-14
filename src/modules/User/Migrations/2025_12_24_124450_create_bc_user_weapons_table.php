@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('bc_user_weapons', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('hunter_billet_number')->nullable();
             $table->string('hunter_license_number')->nullable();
             $table->date('hunter_license_date')->nullable();
             $table->unsignedBigInteger('weapon_type_id')->nullable();

@@ -23,7 +23,6 @@ class WeaponService
     {
         UserWeapon::create([
             'user_id' => $userId,
-            'hunter_billet_number' => $dto->hunter_billet_number,
             'hunter_license_number' => $dto->hunter_license_number,
             'hunter_license_date' => $dto->hunter_license_date,
             'weapon_type_id' => $dto->weapon_type_id,
