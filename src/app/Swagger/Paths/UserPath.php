@@ -225,13 +225,8 @@ class UserPath
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent(
-                required: ["hunter_billet_number", "hunter_license_number", "hunter_license_date", "weapon_type_id", "caliber"],
+                required: ["hunter_license_number", "hunter_license_date", "weapon_type_id", "caliber"],
                 properties: [
-                    new OA\Property(
-                        property: "hunter_billet_number",
-                        type: "string",
-                        example: "123456"
-                    ),
                     new OA\Property(
                         property: "hunter_license_number",
                         type: "string",
