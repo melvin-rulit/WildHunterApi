@@ -203,6 +203,18 @@ class AuthPath
                         type: "string",
                         example: "123456"
                     ),
+                    new OA\Property(
+                        property: "password",
+                        type: "string",
+                        format: "password",
+                        example: "NewStrongPassword123!"
+                    ),
+                    new OA\Property(
+                        property: "password_confirmation",
+                        type: "string",
+                        format: "password",
+                        example: "NewStrongPassword123!"
+                    ),
                 ]
             )
         ),
