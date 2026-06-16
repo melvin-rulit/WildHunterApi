@@ -143,4 +143,86 @@ class AuthPath
     )]
     public function register(): void
     {}
+
+
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/password/email",
+        summary: "Отправить код для сброса пароля",
+        security: [['bearerAuth' => []]],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["email"],
+                properties: [
+                    new OA\Property(
+                        property: "email",
+                        type: "string",
+                        format: "email",
+                        example: "user@example.com"
+                    ),
+                ]
+            )
+        ),
+        tags: ["Auth"],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
+        ]
+    )]
+    public function sendResetCode(): void
+    {}
+
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/password/reset",
+        summary: "Сброс пароля по коду",
+        security: [['bearerAuth' => []]],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["email", "code", "password", "password_confirmation"],
+                properties: [
+                    new OA\Property(
+                        property: "email",
+                        type: "string",
+                        format: "email",
+                        example: "user@example.com"
+                    ),
+                    new OA\Property(
+                        property: "code",
+                        type: "string",
+                        example: "123456"
+                    ),
+                ]
+            )
+        ),
+        tags: ["Auth"],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
+        ]
+    )]
+    public function resetPassword(): void
+    {}
 }
