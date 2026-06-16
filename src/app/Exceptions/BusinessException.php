@@ -9,7 +9,7 @@ class BusinessException extends BaseException
         string $errorCode = 'BUSINESS_ERROR',
         string $domain = 'app',
         array $context = [],
-        int $status = 400
+        int $status = 409
     ) {
         parent::__construct($message, $status, $errorCode, $domain, $context);
     }
