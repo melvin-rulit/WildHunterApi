@@ -32,9 +32,20 @@ class AuthController
 
         return new AuthSuccessResponse($result['token'], $result['user']);
     }
+
+    /**
+     * @throws UnauthorizedException
+     */
     public function logout(Request $request): Response
     {
-        $request->user()->currentAccessToken()->delete();
+        if (!$request->user()) {
+            throw new UnauthorizedException(
+                errorCode: 'auth_user_false',
+                domain: 'auth'
+            );
+        }
+
+        $request->user()->currentAccessToken()?->delete();
 
         return response()->noContent();
     }
