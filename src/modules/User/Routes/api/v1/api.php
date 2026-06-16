@@ -9,8 +9,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-//Newsletter
+//Подписка на рассылку
 Route::post('/user/newsletter/subscribe',[UserController::class, 'subscribe']);
+
+//Сброс пароля
+Route::post('/password/email', [PasswordController::class, 'sendResetCode']);
+Route::post('/password/reset', [PasswordController::class, 'resetPassword']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -18,5 +22,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/{user}', [UserController::class, 'searchUser']);
     Route::post('/user', [UserController::class, 'profileUpdate']);
 
+    //Изменение пароля
     Route::post('/user/change-password', [PasswordController::class, 'updatePassword']);
  });
