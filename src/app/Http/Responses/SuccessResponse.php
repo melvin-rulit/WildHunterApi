@@ -12,6 +12,7 @@ final class SuccessResponse extends JsonResponse
         private readonly string  $message = '',
         private readonly ?string $code = null,
         private readonly ?string $domain = null,
+        private readonly array $replace = [],
         int                      $status = 200,
         protected mixed $data = [],
     ) {
@@ -38,7 +39,7 @@ final class SuccessResponse extends JsonResponse
     private function resolveMessage(): string
     {
         if ($this->code && $this->domain) {
-            return __($this->domain . '.successes.' . $this->code);
+            return __($this->domain . '.successes.' . $this->code, $this->replace);
         }
 
         return $this->message;
