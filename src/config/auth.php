@@ -101,7 +101,7 @@ return [
         ],
     ],
     'password_reset' => [
-        'ttl' => env('PASSWORD_RESET_TTL', 10),
+        'ttl' => (int) env('PASSWORD_RESET_TTL', 10),
     ],
 
     /*
