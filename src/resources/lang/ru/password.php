@@ -5,6 +5,7 @@ return [
         'password_confirmation_mismatch' => 'Пароли не совпадают',
         'code_invalid' => 'Неверный код подтверждения.',
         'code_expired' => 'Код истёк или недействителен.',
+        'code_already_sent' => 'Код уже отправлен. Попробуйте позже',
     ],
     'rules' => [
 
@@ -24,7 +25,6 @@ return [
 
             'code_required' => 'Введите код подтверждения.',
             'code_digits' => 'Код должен состоять из 6 цифр.',
-            'code_already_sent' => 'Код уже отправлен. Попробуйте позже',
 
             'password_required' => 'Пароль обязателен',
             'password_min'      => 'Пароль должен быть минимум 8 символов',
