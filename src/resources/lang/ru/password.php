@@ -2,6 +2,7 @@
 return [
     'errors' => [
         'current_password_incorrect' => 'Текущий пароль неверный',
+        'password_confirmation_mismatch' => 'Пароли не совпадают',
         'code_invalid' => 'Неверный код подтверждения.',
         'code_expired' => 'Код истёк или недействителен.',
     ],
