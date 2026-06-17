@@ -46,16 +46,26 @@ class PasswordService
 
     /**
      * @throws RandomException
+     * @throws ValidationException
      */
     public function sendResetCode($email): array
     {
         $ttl = (int) config('auth.password_reset.ttl');
 
+        $key = "reset-password:{$email}";
+        $cooldownKey = "reset-password-cooldown:{$email}";
+
+        if (Cache::has($cooldownKey)) {
+            throw new ValidationException(
+                errorCode: 'code_already_sent',
+                domain: 'password'
+            );
+        }
+
         $code = (string) random_int(100000, 999999);
 
-        $key = "reset-password:{$email}";
-
         Cache::put($key, $code, now()->addMinutes($ttl));
+        Cache::put($cooldownKey, true, now()->addSeconds(90));
 
         return [
             'code' => 'code_send_successfully',

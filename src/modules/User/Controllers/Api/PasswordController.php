@@ -40,6 +40,7 @@ class PasswordController
 
     /**
      * @throws RandomException
+     * @throws ValidationException
      */
     public function sendResetCode(SendCodeResetPasswordRequest $request): JsonResponse
     {
