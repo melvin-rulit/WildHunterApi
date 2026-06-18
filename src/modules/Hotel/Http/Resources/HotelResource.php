@@ -12,7 +12,8 @@ class HotelResource extends BaseJsonResource
             'id' => $this->resource->id,
             'title'=> $this->resource->title,
             'slug'=> $this->resource->slug,
-            'image_url' => $this->resource->getImageUrl(),
+//            'image_url' => $this->resource->getImageUrl(),
+            'is_featured' => $this->resource->is_featured,
         ];
     }
 }
