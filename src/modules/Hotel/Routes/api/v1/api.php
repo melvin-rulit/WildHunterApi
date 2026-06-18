@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Hotel\Controllers\HotelController;
 
+Route::post('/hotels/offers', [HotelController::class, 'getHotels']);
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/hotels/offers', [HotelController::class, 'getHotels']);
+
 });
