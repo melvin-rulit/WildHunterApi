@@ -79,7 +79,7 @@ class PasswordService
      */
     public function resetCode($email, $code, $password): array
     {
-        $key = "reset_password:{$email}";
+        $key = "reset-password:{$email}";
 
         $cachedCode = Cache::get($key);
 
@@ -111,7 +111,7 @@ class PasswordService
         $user->save();
 
         return [
-            'code' => 'code_reset_successfully',
+            'code' => 'password_update_successfully',
             'token' => $token,
         ];
     }
