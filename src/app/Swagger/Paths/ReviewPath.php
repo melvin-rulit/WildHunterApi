@@ -58,15 +58,10 @@ class ReviewPath
          requestBody: new OA\RequestBody(
              content: new OA\JsonContent(
                  properties: [
-                     new OA\Parameter(
-                         name: "type",
-                         description: "тип сервиса",
-                         in: "path",
-                         required: true,
-                         schema: new OA\Schema(
-                             type: "string",
-                             example: "hotel"
-                         )
+                     new OA\Property(
+                         property: "type",
+                         type: "string",
+                         example: "hotel",
                      ),
                      new OA\Property(
                          property: "order_by",
