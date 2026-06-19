@@ -13,7 +13,8 @@ class HotelResource extends BaseJsonResource
             'title'=> $this->resource->title,
             'slug'=> $this->resource->slug,
 //            'image_url' => $this->resource->getImageUrl(),
-            'is_featured' => $this->resource->is_featured,
+            'review_score' => $this->resource->review_score,
+            'star_rate' => $this->resource->star_rate,
         ];
     }
 }
