@@ -152,4 +152,44 @@ class HotelsPath
     )]
     public function addFavorite(): void
     {}
+
+    #[OA\Delete(
+        path: "/api/" . ApiConfig::VERSION . "/hotels/{id}/favorite",
+        summary: "Удалить отель из избранного",
+        security: [['bearerAuth' => []]],
+        tags: ["Hotels"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "id отеля",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(
+                    type: "integer",
+                    example: 1
+                )
+            ),
+        ],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                ref: "#/components/responses/ValidationError",
+                response: 422
+            ),
+            new OA\Response(
+                response: 401,
+                description: "Не авторизован",
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
+                    ]
+                )
+            )
+        ]
+    )]
+    public function removeFavorite(): void
+    {}
 }
