@@ -58,13 +58,14 @@ class HotelsPath
     {}
 
     #[OA\Get(
-        path: "/api/" . ApiConfig::VERSION . "/hotels/{hotel_id}/comments",
+        path: "/api/" . ApiConfig::VERSION . "/hotels/{id}/comments",
         summary: "Получить комментарии отеля",
         security: [['bearerAuth' => []]],
         tags: ["Hotels"],
         parameters: [
             new OA\Parameter(
-                name: "hotel_id",
+                name: "id",
+                description: "id отеля",
                 in: "path",
                 required: true,
                 schema: new OA\Schema(
@@ -113,13 +114,14 @@ class HotelsPath
     {}
 
     #[OA\Post(
-        path: "/api/" . ApiConfig::VERSION . "/hotels/{hotel_id}/favorite",
+        path: "/api/" . ApiConfig::VERSION . "/hotels/{id}/favorite",
         summary: "Добавить отель в избранное",
         security: [['bearerAuth' => []]],
         tags: ["Hotels"],
         parameters: [
             new OA\Parameter(
-                name: "hotel_id",
+                name: "id",
+                description: "id отеля",
                 in: "path",
                 required: true,
                 schema: new OA\Schema(
