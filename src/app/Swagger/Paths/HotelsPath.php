@@ -129,6 +129,16 @@ class HotelsPath
                     example: 1
                 )
             ),
+            new OA\Parameter(
+                name: "type",
+                description: "тип сервиса",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(
+                    type: "string",
+                    example: "hotel"
+                )
+            ),
         ],
         responses: [
             new OA\Response(
@@ -167,6 +177,16 @@ class HotelsPath
                 schema: new OA\Schema(
                     type: "integer",
                     example: 1
+                )
+            ),
+            new OA\Parameter(
+                name: "type",
+                description: "тип сервиса",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(
+                    type: "string",
+                    example: "hotel"
                 )
             ),
         ],
