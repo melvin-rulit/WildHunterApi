@@ -9,9 +9,9 @@ class HotelFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order_by' => ['string'],
-            'order_direction' => ['string', 'in:asc,desc'],
-            'limit' => ['numeric', 'min:1'],
+            'order_by' => ['nullable', 'string'],
+            'order_direction' => ['nullable', 'string', 'in:asc,desc'],
+            'limit' => ['nullable', 'numeric', 'min:1'],
         ];
     }
 
