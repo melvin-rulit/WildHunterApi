@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Http\Resources;
+namespace Modules\Weapon\Http\Resources;
 
 use App\Http\Resources\BaseJsonResource;
 
