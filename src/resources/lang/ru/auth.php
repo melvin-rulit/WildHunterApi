@@ -6,6 +6,9 @@ return [
         'auth_invalid_credentials' => 'Неверные учетные данные',
         'auth_token_error' => 'Не авторизован',
     ],
+    'labels' => [
+        'guest' => 'Гость',
+    ],
     'rules' => [
         'registration_disabled' => 'Регистрация отключена',
     ],
