@@ -1,0 +1,21 @@
+<?php
+
+namespace Modules\User\Http\Resources;
+
+use App\Http\Resources\BaseJsonResource;
+
+class UserShortResource extends BaseJsonResource
+{
+    public function toArray($request): array
+    {
+        return [
+            'id' => $this->resource->id,
+            'name' => $this->resource->name,
+            'first_name' => $this->resource->first_name,
+            'last_name' => $this->resource->last_name,
+            'nik' => $this->resource->user_name,
+            'avatar_url' => $this->resource->avatar_url,
+            'bio' => $this->resource->bio,
+        ];
+    }
+}
