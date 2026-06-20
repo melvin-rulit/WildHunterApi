@@ -25,9 +25,7 @@ class UserResource extends BaseJsonResource
             'bio' => $this->resource->bio,
             'is_verified' => $this->resource->is_verified,
             'status' => $this->resource->status,
-            'hunter_billet_number' => $this->resource->hunter_billet_number,
             'created_at' => $this->resource->created_at?->translatedFormat('d F Y г.'),
-            'weapons' => UserWeaponResource::collection($this->resource->weapons),
         ];
     }
 }
