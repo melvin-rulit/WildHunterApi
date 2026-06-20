@@ -9,7 +9,7 @@ class HotelFilterData
     public function __construct(
         public ?string $order_by,
         public ?string $order_direction,
-        public ?string $limit,
+        public ?int $limit,
     ) {}
 
     public static function fromRequest(Request $request): self
