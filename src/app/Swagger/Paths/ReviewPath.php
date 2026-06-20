@@ -7,12 +7,17 @@ use OpenApi\Attributes as OA;
 
 class ReviewPath
 {
-    #[OA\Get(
-        path: "/api/" . ApiConfig::VERSION . "/reviews",
-        summary: "Получить все отзывы",
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/services/{id}/reviews",
+        summary: "Получить все отзывы конкретного сервиса",
         requestBody: new OA\RequestBody(
             content: new OA\JsonContent(
                 properties: [
+                    new OA\Property(
+                        property: "type",
+                        type: "string",
+                        example: "hotel",
+                    ),
                     new OA\Property(
                         property: "order_by",
                         type: "string",
@@ -33,6 +38,18 @@ class ReviewPath
             )
         ),
         tags: ["Reviews"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "id сервиса",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(
+                    type: "integer",
+                    example: 1
+                )
+            ),
+        ],
         responses: [
             new OA\Response(
                 ref: "#/components/responses/SuccessResponse",
@@ -53,8 +70,8 @@ class ReviewPath
     {}
 
      #[OA\Post(
-        path: "/api/" . ApiConfig::VERSION . "/service/reviews",
-        summary: "Получить отзыв для сервиса",
+        path: "/api/" . ApiConfig::VERSION . "/services/reviews",
+        summary: "Получить все отзывы для определенного типа сервиса",
          requestBody: new OA\RequestBody(
              content: new OA\JsonContent(
                  properties: [
