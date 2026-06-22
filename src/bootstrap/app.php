@@ -29,8 +29,6 @@ return Application::configure(basePath: dirname(__DIR__))
                     'success' => false,
                     'message' => __('auth.errors.auth_token_error'),
                     'error_code' => 'auth_token_error',
-                    'errors' => [],
-                    'trace_id' => $request->attributes->get('trace_id')
                 ], 401);
             }
 
