@@ -41,7 +41,7 @@ class Review extends BaseModel
     {
         return $this->belongsTo(User::class, "author_id")->withDefault([
             'name' => __("auth.labels.guest"),
-            'avatar_url' => '/guest.png',
+            'avatar_url' => asset('uploads/0000/1/2026/11/14/avatar.png'),
             'is_guest' => true,
         ]);
     }
