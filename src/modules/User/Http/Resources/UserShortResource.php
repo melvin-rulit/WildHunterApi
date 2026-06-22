@@ -9,6 +9,7 @@ class UserShortResource extends BaseJsonResource
     public function toArray($request): array
     {
         return [
+            'is_guest' => $this->resource->is_guest ?? false,
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'first_name' => $this->resource->first_name,
