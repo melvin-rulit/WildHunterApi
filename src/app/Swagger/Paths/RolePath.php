@@ -19,14 +19,9 @@ class RolePath
                 response: 200
             ),
             new OA\Response(
-                response: 401,
-                description: "Не авторизован",
-                content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
-                    ]
-                )
-            )
+                ref: "#/components/responses/AuthResponse",
+                response: 401
+            ),
         ]
     )]
     public function GetUsers(): void
@@ -56,14 +51,9 @@ class RolePath
                 response: 422
             ),
             new OA\Response(
-                response: 401,
-                description: "Не авторизован",
-                content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
-                    ]
-                )
-            )
+                ref: "#/components/responses/AuthResponse",
+                response: 401
+            ),
         ]
     )]
     public function getById(): void {}
@@ -92,14 +82,9 @@ class RolePath
                 response: 422
             ),
             new OA\Response(
-                response: 401,
-                description: "Не авторизован",
-                content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
-                    ]
-                )
-            )
+                ref: "#/components/responses/AuthResponse",
+                response: 401
+            ),
         ]
     )]
     public function getByCode(): void {}
@@ -128,14 +113,9 @@ class RolePath
                 response: 422
             ),
             new OA\Response(
-                response: 401,
-                description: "Не авторизован",
-                content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property: "message", type: "string", example: "Не авторизован")
-                    ]
-                )
-            )
+                ref: "#/components/responses/AuthResponse",
+                response: 401
+            ),
         ]
     )]
     public function getUserRole(): void {}
