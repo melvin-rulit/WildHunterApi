@@ -49,7 +49,7 @@ class UserService
             'hunter_billet_number' => $dto->hunter_billet_number,
         ], fn($v) => $v !== null));
 
-        $user->bio = $dto->bio ? clean($dto->bio) : null;
+        $user->bio = $dto->bio ? strip_tags($dto->bio) : null;
         $user->updateFullName();
         $user->save();
 
