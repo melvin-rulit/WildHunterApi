@@ -2,11 +2,15 @@
 
 namespace Modules\User\Services;
 
+use App\Exceptions\ConflictException;
+use App\Exceptions\ForbiddenException;
 use App\Models\User;
+use Modules\Hotel\Models\Hotel;
 use Modules\User\Dto\SubscribeData;
 use Modules\User\Models\Subscriber;
 use Modules\User\Dto\ProfileUpdateData;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\User\Models\UserWishList;
 
 class UserService
 {
@@ -90,6 +94,60 @@ class UserService
         return [
             'code' => $code,
             'subscriber' => $subscriber,
+        ];
+    }
+
+    /**
+     * @throws ForbiddenException
+     * @throws ConflictException
+     */
+    public function addFavorite(?User $user, Hotel $hotel, string $object_model): array
+    {
+        if (!$user) {
+            throw new ForbiddenException(
+                errorCode: 'register_for_more_features',
+                domain: 'auth'
+            );
+        }
+
+//        $allServices = get_bookable_services();
+//        if (empty($allServices[$object_model])) {
+////            return $this->sendError(__('Service type not found'));
+//        }
+
+        $wishList = UserWishList::where("object_id", $hotel->id)
+            ->where("object_model", $object_model)
+            ->where("user_id", $user->id)
+            ->first();
+
+        if ($wishList) {
+            throw new ConflictException(
+                errorCode: 'already_favorite',
+                domain: 'wishlist'
+            );
+        }
+
+        $wishList = UserWishList::create([
+            'object_id' => $hotel->id,
+            'object_model' => $object_model,
+            'user_id' => $user->id,
+            'create_user' => $user->id,
+        ]);
+
+        return [
+            'code' => 'added_to_favorites',
+            'wishList' => $wishList,
+        ];
+    }
+    public function removeFavorite(?User $user,Hotel $hotel, string $object_model): array
+    {
+        UserWishList::where("object_id", $hotel->id)
+            ->where("object_model", $object_model)
+            ->where("user_id", $user->id)
+            ->delete();
+
+        return [
+            'code' => 'deleted_from_favorites',
         ];
     }
 }
