@@ -9,7 +9,9 @@ class UserWhiteListResource extends BaseJsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->resource->id,
+            'service_id' => $this->resource->object_id,
+            'service_model' => $this->resource->object_model,
+            'user_id' => $this->resource->user_id,
         ];
     }
 }
