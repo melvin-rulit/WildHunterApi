@@ -5,6 +5,7 @@ return [
     ],
     'errors' => [
         'already_favorite' => 'Уже добавлено в избранное',
+        'already_deleted' => 'Уже удалено из избранного',
     ],
     'rules' => [
 
