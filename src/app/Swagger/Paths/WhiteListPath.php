@@ -9,7 +9,7 @@ class WhiteListPath
 {
     #[OA\Post(
         path: "/api/" . ApiConfig::VERSION . "/services/{id}/favorites",
-        summary: "Получить все определенные сервисы из избранного",
+        summary: "Является ли сервис избранным для пользователя",
         security: [['bearerAuth' => []]],
         tags: ["WhiteList"],
         parameters: [
@@ -50,6 +50,41 @@ class WhiteListPath
         ]
     )]
     public function getFavorites(): void
+    {}
+
+    #[OA\Post(
+        path: "/api/" . ApiConfig::VERSION . "/services/favorites",
+        summary: "Получить избранное пользователя",
+        security: [['bearerAuth' => []]],
+        tags: ["WhiteList"],
+        parameters: [
+            new OA\Parameter(
+                name: "type",
+                description: "тип сервиса",
+                in: "query",
+                required: true,
+                schema: new OA\Schema(
+                    type: "string",
+                    example: "hotel"
+                )
+            ),
+        ],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                ref: "#/components/responses/ValidationError",
+                response: 422
+            ),
+            new OA\Response(
+                ref: "#/components/responses/AuthResponse",
+                response: 401
+            ),
+        ]
+    )]
+    public function getUserFavorites(): void
     {}
 
     #[OA\Post(
