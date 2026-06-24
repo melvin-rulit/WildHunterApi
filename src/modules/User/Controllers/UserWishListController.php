@@ -2,6 +2,8 @@
 
 namespace Modules\User\Controllers;
 
+use App\Exceptions\ValidationException;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Modules\Hotel\Models\Hotel;
 use Illuminate\Http\JsonResponse;
@@ -17,9 +19,24 @@ class UserWishListController
     {
     }
 
+    public function getFavorites(Request $request): JsonResponse
+    {
+        $result = $this->userService->getFavorites($request->user(), 'hotel');
+
+        return new SuccessResponse(data: UserWhiteListResource::collection($result['wishList']));
+    }
+
+    public function checkFavorite(Request $request, Hotel $hotel): JsonResponse
+    {
+        $result = $this->userService->check($request->user(), $hotel,'hotel');
+
+        return new SuccessResponse(data: $result);
+    }
+
     /**
      * @throws ForbiddenException
      * @throws ConflictException
+     * @throws ValidationException
      */
     public function addFavorite(Request $request, Hotel $hotel): JsonResponse
     {
@@ -28,8 +45,10 @@ class UserWishListController
         return new SuccessResponse(code: $result['code'], data: new UserWhiteListResource($result['wishList']));
     }
 
-    public function removeFavorite(Request $request, Hotel $hotel)
+    public function removeFavorite(Request $request, Hotel $hotel): JsonResponse
     {
+        $result = $this->userService->removeFavorite($request->user(), $hotel, 'hotel');
 
+        return new SuccessResponse(code: $result['code'], data: new UserWhiteListResource($result['wishList']));
     }
 }
