@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
 
 class BaseModel extends Model
 {
@@ -15,8 +14,6 @@ class BaseModel extends Model
     }
     public function findById($id)
     {
-        return Cache::rememberForever($this->cacheKey() . ':' . $id, function () use ($id) {
-            return $this->find($id);
-        });
+        return $this->find($id);
     }
 }
