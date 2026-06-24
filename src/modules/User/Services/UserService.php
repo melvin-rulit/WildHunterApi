@@ -171,15 +171,36 @@ class UserService
             'wishList' => $wishList,
         ];
     }
-    public function removeFavorite(?User $user,Hotel $hotel, string $object_model): array
+
+    /**
+     * @throws ConflictException
+     */
+    public function removeFavorite(?User $user, Hotel $hotel, string $object_model): array
     {
+        $wishList = UserWishList::where("object_id", $hotel->id)
+            ->where("object_model", $object_model)
+            ->where("user_id", $user->id)
+            ->exists();
+
+        if (!$wishList) {
+            throw new ConflictException(
+                errorCode: 'already_deleted',
+                domain: 'wishlist'
+            );
+        }
+
         UserWishList::where("object_id", $hotel->id)
             ->where("object_model", $object_model)
             ->where("user_id", $user->id)
             ->delete();
 
+        $wishList = UserWishList::where("object_model", $object_model)
+            ->where("user_id", $user->id)
+            ->get();
+
         return [
             'code' => 'deleted_from_favorites',
+            'wishList' => $wishList,
         ];
     }
 }
