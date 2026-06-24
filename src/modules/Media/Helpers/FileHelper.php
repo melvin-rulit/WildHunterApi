@@ -2,6 +2,7 @@
 
 namespace Modules\Media\Helpers;
 
+use Illuminate\Support\Facades\Cache;
 use Modules\Media\Models\MediaFile;
 
 class FileHelper
@@ -35,26 +36,40 @@ class FileHelper
         return $sizes;
     }
 
+    public static function urlCacheKey(int|string $fileId, string $size = 'medium'): string
+    {
+        return 'media_file_view_url:' . $fileId . ':' . $size;
+    }
+
+    public static function forgetUrlCache(int|string|null $fileId): void
+    {
+        if ($fileId === null || $fileId === '') {
+            return;
+        }
+
+        foreach (array_keys(self::$defaultSize) as $size) {
+            Cache::forget(self::urlCacheKey($fileId, $size));
+        }
+    }
+
     public static function url($fileId, $size = 'medium', $resize = true)
     {
         if ($fileId instanceof MediaFile) {
-            $file = $fileId;
-        } else {
-            $file = (new MediaFile())->findById($fileId);
+            return $fileId->view_url ?: false;
         }
-        if (empty($file)) {
+
+        if (empty($fileId)) {
             return false;
         }
-        switch ($file->driver) {
-            default:
-                $url = $file->view_url;
-                $cdn_url = config('bc.cdn_url');
-                if ($cdn_url) {
-                    $width = static::$defaultSize[$size][0] ?? static::$defaultSize['medium'][0];
-                    if ($width == 'full') $width = '';
-                    return $cdn_url . '/' . ($width ? 'width=' . $width : '') . ',quality=70,f=auto/uploads/' . $file->file_path;
-                }
-        }
-        return $url;
+
+        $cacheKey = self::urlCacheKey($fileId, $size);
+
+        $url = Cache::remember($cacheKey, now()->addDay(), function () use ($fileId) {
+            $file = MediaFile::find($fileId);
+
+            return $file?->view_url ?? '';
+        });
+
+        return $url !== '' ? $url : false;
     }
 }

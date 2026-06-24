@@ -5,6 +5,7 @@ namespace Modules\Media\Models;
 use App\Models\BaseModel;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Modules\Media\Helpers\FileHelper;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
@@ -13,6 +14,17 @@ class MediaFile extends BaseModel
     use SoftDeletes;
 
     protected $table = 'media_files';
+
+    protected static function booted(): void
+    {
+        static::saved(function (MediaFile $file) {
+            $file->forgetCachedData();
+        });
+
+        static::deleted(function (MediaFile $file) {
+            $file->forgetCachedData();
+        });
+    }
 
     public static function findMediaByName($name)
     {
@@ -24,13 +36,20 @@ class MediaFile extends BaseModel
         return sprintf("%s/%s", $this->getTable(), $this->getKey());
     }
 
+    public function forgetCachedData(): void
+    {
+        FileHelper::forgetUrlCache($this->getKey());
+        Cache::forget($this->cacheKey() . ':' . $this->getKey());
+    }
+
     public function scopeInFolder($query, $folder_id){
         return $query->where('folder_id', $folder_id);
     }
 
     public function forceDelete(): bool
     {
-        Cache::forget($this->cacheKey() . ':' . $this->id);
+        $this->forgetCachedData();
+
         return parent::forceDelete();
     }
 
