@@ -4,6 +4,7 @@ namespace Modules\User\Services;
 
 use App\Exceptions\ConflictException;
 use App\Exceptions\ForbiddenException;
+use App\Exceptions\ValidationException;
 use App\Models\User;
 use Modules\Hotel\Models\Hotel;
 use Modules\User\Dto\SubscribeData;
@@ -97,12 +98,43 @@ class UserService
         ];
     }
 
+    public function check(?User $user, ?Hotel $hotel, string $object_model): array
+    {
+        $result = UserWishList::where("object_model", $object_model)
+           ->where("object_id", $hotel->id)
+            ->where("user_id", $user->id)
+            ->exists();
+
+        return [
+            'is_in_wishList' => $result,
+        ];
+    }
+
+    public function getFavorites(?User $user, string $object_model): array
+    {
+        $wishList = UserWishList::where("object_model", $object_model)
+            ->where("user_id", $user->id)
+            ->get();
+
+        return [
+            'wishList' => $wishList,
+        ];
+    }
+
     /**
      * @throws ForbiddenException
      * @throws ConflictException
+     * @throws ValidationException
      */
-    public function addFavorite(?User $user, Hotel $hotel, string $object_model): array
+    public function addFavorite(?User $user, ?Hotel $hotel, string $object_model): array
     {
+        if (!$hotel) {
+            throw new ValidationException(
+                errorCode: 'hotel_not_found',
+                domain: 'hotel'
+            );
+        }
+
         if (!$user) {
             throw new ForbiddenException(
                 errorCode: 'register_for_more_features',
