@@ -7,6 +7,8 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -30,6 +32,14 @@ return Application::configure(basePath: dirname(__DIR__))
                     'message' => __('auth.errors.auth_token_error'),
                     'error_code' => 'auth_token_error',
                 ], 401);
+            }
+
+            if ($e instanceof NotFoundHttpException) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ресурс не найден',
+                    'error_code' => 'not_found',
+                ], 404);
             }
 
             if ($e instanceof ValidationException) {
