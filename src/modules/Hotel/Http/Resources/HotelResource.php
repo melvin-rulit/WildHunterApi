@@ -12,7 +12,7 @@ class HotelResource extends BaseJsonResource
             'id' => $this->resource->id,
             'title'=> $this->resource->title,
             'slug'=> $this->resource->slug,
-//            'image_url' => $this->resource->getImageUrl(),
+            'image_url' => $this->resource->getImageUrl(),
             'review_score' => $this->resource->review_score,
             'star_rate' => $this->resource->star_rate,
         ];
