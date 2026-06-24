@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Изменение пароля
     Route::post('/user/change-password', [PasswordController::class, 'updatePassword']);
     //Избранное
-    Route::post('/services/{hotel}/favorites', [UserWishListController::class, 'getFavorites']);
+    Route::post('/services/favorites', [UserWishListController::class, 'getFavorites']);
+    Route::post('/services/{hotel}/favorites', [UserWishListController::class, 'checkFavorite']);
     Route::delete('/services/{hotel}/favorite', [UserWishListController::class, 'removeFavorite']);
  });
