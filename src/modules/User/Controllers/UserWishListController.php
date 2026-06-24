@@ -42,13 +42,16 @@ class UserWishListController
     {
         $result = $this->userService->addFavorite($request->user(), $hotel, 'hotel');
 
-        return new SuccessResponse(code: $result['code'], data: new UserWhiteListResource($result['wishList']));
+        return new SuccessResponse(code: $result['code'], domain: 'wishList', data: new UserWhiteListResource($result['wishList']));
     }
 
+    /**
+     * @throws ConflictException
+     */
     public function removeFavorite(Request $request, Hotel $hotel): JsonResponse
     {
         $result = $this->userService->removeFavorite($request->user(), $hotel, 'hotel');
 
-        return new SuccessResponse(code: $result['code'], data: new UserWhiteListResource($result['wishList']));
+        return new SuccessResponse(code: $result['code'], domain: 'wishlist', data: UserWhiteListResource::collection($result['wishList']));
     }
 }
