@@ -14,7 +14,7 @@ return [
 
     ],
     'successes' => [
-        'save_success' => 'Добавлено в избранное.',
+        'added_to_favorites' => 'Добавлено в избранное.',
         'deleted_from_favorites' => 'Удалено из избранного.',
     ]
 ];
