@@ -16,13 +16,20 @@ class LocationController extends Controller
     public function __construct(protected LocationService $locationService)
     {
     }
+    public function getBestLocations(LocationFilterRequest $request): JsonResponse
+    {
+        $dto = LocationFilterData::fromRequest($request);
+        $result = $this->locationService->getBestLocations($dto);
+
+        return new SuccessResponse(data: BestLocationResource::collection($result['locations'])
+        );
+    }
+
     public function getLocations(LocationFilterRequest $request): JsonResponse
     {
         $dto = LocationFilterData::fromRequest($request);
         $result = $this->locationService->getLocations($dto);
 
-        return new SuccessResponse(
-            data: LocationResource::collection($result['data'])
-        );
+        return new SuccessResponse(data: LocationResource::collection($result['locations']));
     }
 }

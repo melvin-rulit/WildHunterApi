@@ -7,7 +7,7 @@ use Modules\Location\Dto\LocationFilterData;
 
 class LocationService
 {
-    public function getLocations(LocationFilterData $dto): array
+    public function getBestLocations(LocationFilterData $dto): array
     {
         $locations = Location::published()
             ->withCount('hotels')
@@ -18,8 +18,15 @@ class LocationService
             ->get();
 
         return [
-            'code' => '',
-            'data' => $locations
+            'locations' => $locations
+        ];
+    }
+    public function getLocations(LocationFilterData $dto): array
+    {
+        $locations = Location::published()->get();
+
+        return [
+            'locations' => $locations
         ];
     }
 }
