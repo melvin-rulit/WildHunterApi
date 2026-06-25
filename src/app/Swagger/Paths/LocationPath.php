@@ -52,4 +52,23 @@ class LocationPath
     )]
     public function locations(): void
     {}
+
+    #[OA\Get(
+        path: "/api/" . ApiConfig::VERSION . "/locations",
+        summary: "Получить список локаций",
+        security: [['bearerAuth' => []]],
+        tags: ["Locations"],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                ref: "#/components/responses/AuthResponse",
+                response: 401
+            ),
+        ]
+    )]
+    public function getLocations(): void
+    {}
 }
