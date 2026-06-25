@@ -10,7 +10,8 @@ use Modules\User\Helpers\PermissionHelper;
 class ModuleProvider extends ModuleServiceProvider
 {
 
-    public function boot(SitemapHelper $sitemapHelper){
+    public function boot(SitemapHelper $sitemapHelper): void
+    {
 
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
 
@@ -19,22 +20,22 @@ class ModuleProvider extends ModuleServiceProvider
             $sitemapHelper->add("animal",[app()->make(Animal::class),'getForSitemap']);
         }
 
-        PermissionHelper::add([
-            // animal
-            'animal_view',
-            'animal_create',
-            'animal_update',
-            'animal_delete',
-            'animal_manage_others',
-            'animal_manage_attributes',
-        ]);
+//        PermissionHelper::add([
+//            // animal
+//            'animal_view',
+//            'animal_create',
+//            'animal_update',
+//            'animal_delete',
+//            'animal_manage_others',
+//            'animal_manage_attributes',
+//        ]);
     }
     /**
      * Register bindings in the container.
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->register(RouterServiceProvider::class);
     }

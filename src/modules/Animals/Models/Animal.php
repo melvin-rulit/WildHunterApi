@@ -10,10 +10,6 @@ class Animal extends Model
 {
     use SoftDeletes;
 
-    public function __construct()
-    {
-    }
-
     protected $table = 'bc_animals';
 
     protected $fillable = [
