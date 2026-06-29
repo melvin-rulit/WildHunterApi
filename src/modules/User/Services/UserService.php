@@ -17,7 +17,7 @@ class UserService
 {
     public function searchAl(): Collection
     {
-        return User::with(['role', 'weapons', 'weapons.type', 'weapons.caliber'])->all();
+        return User::with(['role', 'weapons', 'weapons.type', 'weapons.caliber'])->get();
     }
     public function searchById(string $id): ?User
     {

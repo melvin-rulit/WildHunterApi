@@ -23,7 +23,7 @@ class UserController
     {
         $result = $this->userService->searchAl();
 
-        return new SuccessResponse(data: new UserResource($result));
+        return new SuccessResponse(data: UserResource::collection($result));
     }
     public function searchUser($id): JsonResponse
     {
