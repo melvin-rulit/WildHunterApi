@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\User\Controllers\Api;
+namespace Modules\User\Controllers;
 
+use App\Http\Responses\SuccessResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Modules\User\Dto\ProfileUpdateData;
 use Modules\User\Dto\SubscribeData;
+use Modules\User\Events\UserSubscriberSubmit;
+use Modules\User\Http\Requests\ProfileUpdateRequest;
+use Modules\User\Http\Requests\SubscribeRequest;
+use Modules\User\Http\Resources\UserResource;
 use Modules\User\Http\Resources\UserWithWeaponResource;
 use Modules\User\Services\UserService;
-use App\Http\Responses\SuccessResponse;
-use Modules\User\Dto\ProfileUpdateData;
-use Modules\User\Http\Resources\UserResource;
-use Modules\User\Events\UserSubscriberSubmit;
-use Modules\User\Http\Requests\SubscribeRequest;
-use Modules\User\Http\Requests\ProfileUpdateRequest;
 
 class UserController
 {
