@@ -4,7 +4,7 @@ return [
         'model_name' => 'Оружие',
     ],
     'errors' => [
-
+        'weapon_not_found' => 'Оружие не найдено',
     ],
     'rules' => [
 
@@ -24,5 +24,6 @@ return [
     ],
     'successes' => [
         'save_success' => 'Оружие сохранено.',
+        'delete_success' => 'Оружие удалено.',
     ]
 ];

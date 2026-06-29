@@ -92,4 +92,35 @@ class WeaponPath
     )]
     public function SaveWeapons(): void
     {}
+
+    #[OA\Delete(
+        path: "/api/" . ApiConfig::VERSION . "/user/weapons/{id}",
+        summary: "Удалить оружие пользователя",
+        security: [['bearerAuth' => []]],
+        tags: ["Weapons"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "ID записи оружия пользователя",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(
+                    type: "integer",
+                    example: 1
+                )
+            ),
+        ],
+        responses: [
+            new OA\Response(
+                ref: "#/components/responses/SuccessResponse",
+                response: 200
+            ),
+            new OA\Response(
+                ref: "#/components/responses/AuthResponse",
+                response: 401
+            ),
+        ]
+    )]
+    public function DeleteUserWeapon(): void
+    {}
 }

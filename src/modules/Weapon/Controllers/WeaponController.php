@@ -1,6 +1,8 @@
 <?php
+
 namespace Modules\Weapon\Controllers;
 
+use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\SuccessResponse;
 use Illuminate\Http\JsonResponse;
@@ -37,8 +39,14 @@ class WeaponController extends Controller
 
         return new SuccessResponse(code: $result['code'], domain: 'weapon');
     }
-    public function destroy($id)
-    {
 
+    /**
+     * @throws NotFoundException
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        $result = $this->weaponService->deleteUserWeapon(Auth::id(), $id);
+
+        return new SuccessResponse(code: $result['code'], domain: 'weapon');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Modules\Weapon\Services;
 
+use App\Exceptions\NotFoundException;
 use Modules\User\Models\UserWeapon;
 use Modules\Weapon\Models\Caliber;
 use Modules\Weapon\Models\WeaponType;
@@ -31,6 +32,29 @@ class WeaponService
 
         return [
             'code' => 'save_success',
+        ];
+    }
+
+    /**
+     * @throws NotFoundException
+     */
+    public function deleteUserWeapon(int $userId, int $weaponId): array
+    {
+        $weapon = UserWeapon::where('id', $weaponId)
+            ->where('user_id', $userId)
+            ->first();
+
+        if (!$weapon) {
+            throw new NotFoundException(
+                errorCode: 'weapon_not_found',
+                domain: 'weapon'
+            );
+        }
+
+        $weapon->delete();
+
+        return [
+            'code' => 'delete_success',
         ];
     }
 }
