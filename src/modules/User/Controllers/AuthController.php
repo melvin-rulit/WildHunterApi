@@ -1,20 +1,20 @@
 <?php
 
-namespace Modules\User\Controllers\Api;
+namespace Modules\User\Controllers;
 
+use App\Exceptions\ForbiddenException;
+use App\Exceptions\UnauthorizedException;
+use App\Http\Responses\AuthSuccessResponse;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
 use Modules\User\Dto\Auth\LoginData;
-use App\Exceptions\ForbiddenException;
-use Illuminate\Auth\Events\Registered;
 use Modules\User\Dto\Auth\RegisterData;
-use App\Exceptions\UnauthorizedException;
-use Modules\User\Services\Auth\AuthService;
-use App\Http\Responses\AuthSuccessResponse;
 use Modules\User\Http\Requests\Auth\LoginRequest;
+//use Modules\User\Http\Requests\Auth\RefreshTokenRequest;
 use Modules\User\Http\Requests\Auth\RegisterRequest;
-use Modules\User\Http\Requests\Auth\RefreshTokenRequest;
+use Modules\User\Services\Auth\AuthService;
 
 class AuthController
 {
@@ -63,8 +63,8 @@ class AuthController
             return new AuthSuccessResponse($result['token'], $result['user']);
         }
 
-    public function refreshToken(RefreshTokenRequest $request)
-    {
-
-    }
+//    public function refreshToken(RefreshTokenRequest $request)
+//    {
+//
+//    }
 }

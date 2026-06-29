@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\User\Controllers\Api;
+namespace Modules\User\Controllers;
 
 use App\Exceptions\BusinessException;
-use Random\RandomException;
+use App\Exceptions\ValidationException;
+use App\Http\Responses\SuccessResponse;
 use App\Service\MailService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use App\Exceptions\ValidationException;
-use App\Http\Responses\SuccessResponse;
 use Modules\User\Dto\Auth\UpdatePasswordData;
 use Modules\User\Emails\PasswordResetMessageEmail;
 use Modules\User\Events\PasswordUpdatedEvent;
-use Modules\User\Services\Auth\PasswordService;
-use Modules\User\Http\Requests\ResetPasswordRequest;
 use Modules\User\Http\Requests\ChangePasswordRequest;
+use Modules\User\Http\Requests\ResetPasswordRequest;
 use Modules\User\Http\Requests\SendCodeResetPasswordRequest;
+use Modules\User\Services\Auth\PasswordService;
+use Random\RandomException;
 
 
 class PasswordController
