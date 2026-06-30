@@ -1,0 +1,37 @@
+<?php
+
+namespace Modules\Hotel\Dto;
+
+use Illuminate\Http\Request;
+
+class HotelSearchData
+{
+    public function __construct(
+        public ?int $location_id,
+        public ?int $animal_id,
+        public string $startDate,
+        public string $endDate,
+        public int $adults,
+        public int $children,
+        public ?string $order_by,
+        public ?string $order_direction,
+        public ?int $limit,
+    ) {}
+
+    public static function fromRequest(Request $request): self
+    {
+        $data = $request->validated();
+
+        return new self(
+            location_id: $data['location_id'] ?? null,
+            animal_id: $data['animal_id'] ?? null,
+            startDate: $data['check_in'],
+            endDate: $data['check_out'],
+            adults: $data['adults'] ?? 1,
+            children: $data['children'] ?? 0,
+            order_by: $data['order_by'] ?? null,
+            order_direction: $data['order_direction'] ?? null,
+            limit: $data['limit'] ?? null,
+        );
+    }
+}
