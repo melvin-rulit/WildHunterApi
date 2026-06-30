@@ -8,6 +8,7 @@ class HotelSearchData
 {
     public function __construct(
         public ?int $location_id,
+        public ?array $locationIds,
         public ?int $animal_id,
         public string $startDate,
         public string $endDate,
@@ -24,6 +25,7 @@ class HotelSearchData
 
         return new self(
             location_id: $data['location_id'] ?? null,
+            locationIds: $data['location_ids'] ?? null,
             animal_id: $data['animal_id'] ?? null,
             startDate: $data['check_in'],
             endDate: $data['check_out'],
