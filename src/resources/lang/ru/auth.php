@@ -25,9 +25,12 @@ return [
 
         'email_required' => 'Email обязателен',
         'email_invalid'  => 'Неверный формат email',
+        'email_max'      => 'Email не должен превышать 255 символов',
         'email_unique'   => 'Этот email уже занят',
 
         'password_required' => 'Пароль обязателен',
+        'password_string'   => 'Пароль должен быть строкой',
+        'password_min_login' => 'Пароль должен быть минимум 6 символов',
         'password_min'      => 'Пароль должен быть минимум 8 символов',
         'password_upper_lower' => 'Пароль должен содержать заглавные и строчные буквы',
         'password_number' => 'Пароль должен содержать хотя бы одну цифру',
