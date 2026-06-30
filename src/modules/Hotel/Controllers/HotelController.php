@@ -2,15 +2,15 @@
 
 namespace Modules\Hotel\Controllers;
 
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Hotel\Dto\HotelFilterData;
+use Modules\Hotel\Dto\HotelSearchData;
 use App\Http\Responses\SuccessResponse;
 use Modules\Hotel\Services\HotelService;
 use Modules\Hotel\Http\Resources\HotelResource;
 use Modules\Hotel\Http\Request\HotelFilterRequest;
+use Modules\Hotel\Http\Request\HotelSearchRequest;
 
 class HotelController extends Controller
 {
@@ -21,6 +21,16 @@ class HotelController extends Controller
     {
         $dto = HotelFilterData::fromRequest($request);
         $result = $this->hotelService->getHotels($dto);
+
+        return new SuccessResponse(
+            data: HotelResource::collection($result['data'])
+        );
+    }
+
+    public function searchHotels(HotelSearchRequest $request): JsonResponse
+    {
+        $dto = HotelSearchData::fromRequest($request);
+        $result = $this->hotelService->searchHotels($dto);
 
         return new SuccessResponse(
             data: HotelResource::collection($result['data'])
